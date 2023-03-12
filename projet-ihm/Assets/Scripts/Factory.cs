@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Factory : MonoBehaviour
@@ -24,6 +25,11 @@ public class Factory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+     
+    }
+
+    private void OnMouseDown()
+    {
+        Debug.Log("factory");
     }
 }
