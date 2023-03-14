@@ -6,8 +6,7 @@ using UnityEngine.UI;
 
 public class Factory : MonoBehaviour
 {
-    private GameObject canvas;
-    private Button crossButton;
+    private static GameObject canvas;
     //private Button crossButton;
    
     // Start is called before the first frame update
@@ -22,9 +21,7 @@ public class Factory : MonoBehaviour
         canvas = GameObject.Find("CanvasModalWindowFactory");
         canvas.SetActive(false);
         Debug.Log("hello World");
-        crossButton = GetComponent<Button>();
-        crossButton.
-        crossButton.onClick.AddListener(() => closeModal());
+
     }
 
     // Update is called once per frame
@@ -36,12 +33,15 @@ public class Factory : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log("factory");
-        canvas.SetActive(true);       
+        FactoryPanel.openBoth();
+        canvas.SetActive(true);
+        FactoryPanel.openUnity();
+
     }
 
-    private void closeModal()
+    public static void closeModal()
     {
-        Debug.Log("aa");
+        FactoryPanel.openBoth();
         canvas.SetActive(false);
     }
 
