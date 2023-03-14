@@ -5,11 +5,10 @@ using UnityEngine;
 
 public class Factory : MonoBehaviour
 {
-    private double positionX = -9.48;
-    private double positionY = -3.54;
-    private double scaleX = 0.4;
-    private double scaleY = 0.4;
-
+    private GameObject canvas;
+    private GameObject cross;
+    //private Button crossButton;
+   
     // Start is called before the first frame update
 
     void Start()
@@ -20,6 +19,9 @@ public class Factory : MonoBehaviour
     void Awake()
     {
         Debug.Log("hello World");
+        canvas = GameObject.Find("CanvasModalWindowFactory");
+        cross = GameObject.Find("factoryModalCross");
+        //crossButton.onClick.AddListener(TaskOnClick);
     }
 
     // Update is called once per frame
@@ -31,5 +33,12 @@ public class Factory : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log("factory");
+        canvas.SetActive(false);       
     }
+
+    private void closeModal()
+    {
+
+    }
+
 }
