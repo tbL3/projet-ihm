@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Factory : MonoBehaviour
 {
     private GameObject canvas;
-    private GameObject cross;
+    private Button crossButton;
     //private Button crossButton;
    
     // Start is called before the first frame update
@@ -18,10 +19,12 @@ public class Factory : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("hello World");
         canvas = GameObject.Find("CanvasModalWindowFactory");
-        cross = GameObject.Find("factoryModalCross");
-        //crossButton.onClick.AddListener(TaskOnClick);
+        canvas.SetActive(false);
+        Debug.Log("hello World");
+        crossButton = GetComponent<Button>();
+        crossButton.
+        crossButton.onClick.AddListener(() => closeModal());
     }
 
     // Update is called once per frame
@@ -33,12 +36,13 @@ public class Factory : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log("factory");
-        canvas.SetActive(false);       
+        canvas.SetActive(true);       
     }
 
     private void closeModal()
     {
-
+        Debug.Log("aa");
+        canvas.SetActive(false);
     }
 
 }
