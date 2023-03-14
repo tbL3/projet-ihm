@@ -7,33 +7,43 @@ public class GridManager : MonoBehaviour
 {
     [SerializeField] private int width, height;
 
-    [SerializeField] private Tile tile;
+    [SerializeField] private List<Tile> tiles = new(2);
 
     [SerializeField] private Transform gameCamera;
 
-    private Dictionary<Vector2, Tile> tiles;
+    private Dictionary<Vector2, Tile> tilemap;
+
+    [SerializeField] private int[,] arrayGrid = new int[,] { { 0, 0, 0, 0, 0},
+                                                             { 0, 0, 0, 0, 0},
+                                                             { 0, 0, 0, 0, 0},
+                                                             { 0, 0, 0, 0, 0},
+                                                             { 0, 0, 0, 0, 0},
+    { 0, 0, 0, 0, 0},
+    { 0, 0, 0, 0, 0},};
 
     private void Start()
     {
-        generateGrid();
+        this.width = arrayGrid.GetLength(0); this.height = arrayGrid.GetLength(1);
+        generateGrid(arrayGrid);
     }
 
-    public void generateGrid()
+    public void generateGrid(int[,] arrayGrid)
     {
-        tiles = new Dictionary<Vector2, Tile>();
-        for(int x = 0; x < width; x++) 
+        tilemap = new Dictionary<Vector2, Tile>();
+
+        for (int x = 0; x < width; x++)
         {
 
-            for(int y = 0; y < height; y++)
+            for (int y = 0; y < height; y++)
             {
-                var spawnedTile = Instantiate(tile, new Vector3(x, y), Quaternion.identity);
+                var spawnedTile = Instantiate(tiles[arrayGrid[x, y]], new Vector3(x, y), Quaternion.identity);
                 spawnedTile.name = $"Tile {x} {y}";
 
                 bool isOffset = ((x + y) % 2 == 1);
 
                 spawnedTile.Init(isOffset);
 
-                tiles.Add(new Vector2(x, y), spawnedTile);
+                tilemap.Add(new Vector2(x, y), spawnedTile);
 
             }
         }
@@ -41,7 +51,7 @@ public class GridManager : MonoBehaviour
         gameCamera.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
     }
 
-    public Tile getTileAtPos(Vector3 pos)
+    /**public Tile getTileAtPos(Vector3 pos)
     {
         if(tiles.TryGetValue(pos, out Tile tile))
         {
@@ -49,5 +59,5 @@ public class GridManager : MonoBehaviour
         }
 
         return null;
-    }
+    }**/
 }

@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 3282941353829937305}
   - component: {fileID: 3194468616439196085}
   - component: {fileID: 7897630413872769598}
+  - component: {fileID: 5012637568665999427}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: GrassTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,6 +113,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5012637568665999427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344441812052873375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4affa9c3972745d49938f0777885b9fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseColor: {r: 0.25355998, g: 0.6981132, b: 0.29325217, a: 1}
+  secondaryColor: {r: 0.25490198, g: 0.69803923, b: 0.29411766, a: 1}
+  tileRenderer: {fileID: 3194468616439196085}
+  hoverTile: {fileID: 7382069466896255739}
 --- !u!1 &7382069466896255739
 GameObject:
   m_ObjectHideFlags: 0
