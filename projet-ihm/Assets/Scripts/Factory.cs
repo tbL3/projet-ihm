@@ -34,6 +34,7 @@ public class Factory : MonoBehaviour
     {
         canvas.SetActive(true);
         FactoryPanel.openUnity();
+        Debug.Log("bbb");
 
     }
 

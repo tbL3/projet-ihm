@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class UnityPanel : MonoBehaviour
     Button Button5;
     Button Button6;
 
-    public enum unitType
+    public enum UnitType
     {
         soldier,
         reinforcedSoldier,
@@ -30,24 +31,25 @@ public class UnityPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        GameObject obj1 = GameObject.Find("Button1");
-        GameObject obj2 = GameObject.Find("Button2");
-        GameObject obj3 = GameObject.Find("Button3");
-        GameObject obj4 = GameObject.Find("Button4");
-        GameObject obj5 = GameObject.Find("Button5");
-        GameObject obj6 = GameObject.Find("Button6");
+        GameObject obj1 = GameObject.Find("invisibleButton1");
+        GameObject obj2 = GameObject.Find("invisibleButton2");
+        GameObject obj3 = GameObject.Find("invisibleButton3");
+        GameObject obj4 = GameObject.Find("invisibleButton4");
+        GameObject obj5 = GameObject.Find("invisibleButton5");
+        GameObject obj6 = GameObject.Find("invisibleButton6");
         Button1 = obj1.GetComponent<Button>();
         Button2 = obj2.GetComponent<Button>();
         Button3 = obj3.GetComponent<Button>();
         Button4 = obj4.GetComponent<Button>();
         Button5 = obj5.GetComponent<Button>();
         Button6 = obj6.GetComponent<Button>();
-        Button1.onClick.AddListener(CreateUnit());
-        Button2.onClick.AddListener(CreateUnit());
-        Button3.onClick.AddListener(CreateUnit());
-        Button4.onClick.AddListener(CreateUnit());
-        Button5.onClick.AddListener(CreateUnit());
-        Button6.onClick.AddListener(CreateUnit());
+        Button1.onClick.AddListener(() => CreateUnit("soldier"));
+        Button2.onClick.AddListener(() => CreateUnit("tank"));
+        Button3.onClick.AddListener(() => CreateUnit("plane"));
+        Button4.onClick.AddListener(() => CreateUnit("reinforcedSoldier"));
+        Button5.onClick.AddListener(() => CreateUnit("reinforcedTank"));
+        Button6.onClick.AddListener(() => CreateUnit("reinforcedPlane"));
+        Debug.Log("unityPanel");
     }
 
     // Update is called once per frame
@@ -56,8 +58,9 @@ public class UnityPanel : MonoBehaviour
         
     }
 
-    void CreateUnit(enum UnitType)
+    public void CreateUnit(string unity)
     {
-
+        //spawnUnit(unity)
+        Debug.Log("unity" + unity);
     }
 }
