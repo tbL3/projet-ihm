@@ -32,8 +32,6 @@ public class Factory : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("factory");
-        FactoryPanel.openBoth();
         canvas.SetActive(true);
         FactoryPanel.openUnity();
 
