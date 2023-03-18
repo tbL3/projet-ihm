@@ -10,6 +10,8 @@ public class Tile : MonoBehaviour
 
     [SerializeField] private GameObject hoverTile;
 
+    private bool tileOccupied = false;
+
     public void Init(bool isOffset)
     {
         tileRenderer.color = isOffset ? secondaryColor : baseColor;
@@ -24,4 +26,5 @@ public class Tile : MonoBehaviour
     {
         hoverTile.SetActive(false);
     }
+
 }

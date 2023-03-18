@@ -123,7 +123,69 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &929237339
+--- !u!1001 &571018415
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1709169538905054966, guid: 966f49d7f583cc34c9a398c1c6560112, type: 3}
+      propertyPath: m_Name
+      value: Route
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373623076620128979, guid: 966f49d7f583cc34c9a398c1c6560112, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373623076620128979, guid: 966f49d7f583cc34c9a398c1c6560112, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373623076620128979, guid: 966f49d7f583cc34c9a398c1c6560112, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373623076620128979, guid: 966f49d7f583cc34c9a398c1c6560112, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373623076620128979, guid: 966f49d7f583cc34c9a398c1c6560112, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373623076620128979, guid: 966f49d7f583cc34c9a398c1c6560112, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373623076620128979, guid: 966f49d7f583cc34c9a398c1c6560112, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373623076620128979, guid: 966f49d7f583cc34c9a398c1c6560112, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373623076620128979, guid: 966f49d7f583cc34c9a398c1c6560112, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373623076620128979, guid: 966f49d7f583cc34c9a398c1c6560112, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373623076620128979, guid: 966f49d7f583cc34c9a398c1c6560112, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 966f49d7f583cc34c9a398c1c6560112, type: 3}
+--- !u!4 &571018416 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6373623076620128979, guid: 966f49d7f583cc34c9a398c1c6560112, type: 3}
+  m_PrefabInstance: {fileID: 571018415}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1375841000
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,8 +193,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 929237341}
-  - component: {fileID: 929237340}
+  - component: {fileID: 1375841002}
+  - component: {fileID: 1375841001}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -140,33 +202,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &929237340
+--- !u!114 &1375841001
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 929237339}
+  m_GameObject: {fileID: 1375841000}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d55d910af11faf74c9983925cd414e72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 21
-  height: 10
+  width: 0
+  height: 0
   tiles:
   - {fileID: -6197624127050454557, guid: b7d3405e3acb3bd458c42c148f8f7710, type: 3}
-  - {fileID: 5012637568665999427, guid: b75737a24131b564181d26d408447299, type: 3}
-  gameCamera: {fileID: 1421543437}
---- !u!4 &929237341
+  gameCamera: {fileID: 0}
+  routeObj: {fileID: 571018416}
+--- !u!4 &1375841002
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 929237339}
+  m_GameObject: {fileID: 1375841000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.68606085, y: -0.11079414, z: 0.0055722776}
+  m_LocalPosition: {x: 5.164576, y: 3.790182, z: 0.030921284}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

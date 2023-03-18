@@ -9,7 +9,7 @@ public class UnitScript : MonoBehaviour
     public int teamNum;
     public int x;
     public int y;
-
+    public GameObject unit;
     //This is a low tier idea, don't use it 
     public bool coroutineRunning;
 
@@ -28,7 +28,7 @@ public class UnitScript : MonoBehaviour
     public GameObject damagedParticle;
     //UnitStats
     public string unitName;
-    public int moveSpeed = 2;
+    public int moveRange = 2;
     public int attackRange = 1;
     public int attackDamage = 1;
     public int maxHealthPoints = 5;
@@ -86,6 +86,15 @@ public class UnitScript : MonoBehaviour
     //public List<Node> pathForMovement = null;
     public bool completedMovement = false;
 
+    private void Start()
+    {   
+        
+    }
+
+    private void Update()
+    {
+        
+    }
     private void Awake()
     {
 
@@ -204,6 +213,12 @@ public class UnitScript : MonoBehaviour
 
             healthBar.color = Color.red;
         }
+    }
+
+
+    public void spawnUnit(int x, int y)
+    {
+        Instantiate(Resources.Load("InfanteryT1"), new Vector3(x, y), Quaternion.identity);
     }
     public void unitDie()
     {
