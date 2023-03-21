@@ -12,6 +12,7 @@ public class UnityPanel : MonoBehaviour
     Button Button4;
     Button Button5;
     Button Button6;
+    static public GameObject unityPanel;
 
     public enum UnitType
     {
@@ -31,6 +32,7 @@ public class UnityPanel : MonoBehaviour
 
     private void OnEnable()
     {
+        unityPanel = GameObject.Find("unityPanel");
         GameObject obj1 = GameObject.Find("invisibleButton1");
         GameObject obj2 = GameObject.Find("invisibleButton2");
         GameObject obj3 = GameObject.Find("invisibleButton3");
@@ -58,9 +60,15 @@ public class UnityPanel : MonoBehaviour
         
     }
 
-    public void CreateUnit(string unity)
+    public void CreateUnit(string unit)
     {
-        //spawnUnit(unity)
-        Debug.Log("unity" + unity);
+        if(Factory.getRemainingTurn() > 0)
+        {
+            //popup
+        }
+        else
+        {
+            Factory.createUnit(unit);
+        }
     }
 }
