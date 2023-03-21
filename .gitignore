@@ -59,7 +59,8 @@ sysinfo.txt
 crashlytics-build.properties
 
 /projet-ihm/.vscode
-/projet-ihm/UserSettings/*
-/projet-ihm/.vsconfig
+projet-ihm/UserSettings/
+projet-ihm/.vsconfig/
 /projet-ihm/UserSettings/Layouts/default-2021.dwlt
-/projet-ihm/ProjectSettings/
+projet-ihm/ProjectSettings/
+projet-ihm/Packages/

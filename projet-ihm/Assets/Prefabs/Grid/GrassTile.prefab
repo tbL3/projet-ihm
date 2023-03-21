@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2049389925
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -122,13 +122,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1344441812052873375}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4affa9c3972745d49938f0777885b9fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ecab0768daedf84ea443bda130206b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.25355998, g: 0.6981132, b: 0.29325217, a: 1}
-  secondaryColor: {r: 0.25490198, g: 0.69803923, b: 0.29411766, a: 1}
+  tileX: 0
+  tileY: 0
+  map: {fileID: 0}
+  baseColor: {r: 0.05517978, g: 0.3773585, b: 0.05882353, a: 1}
+  secondaryColor: {r: 0.054901965, g: 0.37647063, b: 0.058823533, a: 1}
   tileRenderer: {fileID: 3194468616439196085}
   hoverTile: {fileID: 7382069466896255739}
+  tileVisualPrefab: {fileID: 1344441812052873375}
+  isWalkable: 1
+  movementCost: 1
 --- !u!1 &7382069466896255739
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,9 +205,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 781320499
+  m_SortingLayerID: 2049389925
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.9433962, g: 0.8533917, b: 0.013349922, a: 0.4627451}
   m_FlipX: 0

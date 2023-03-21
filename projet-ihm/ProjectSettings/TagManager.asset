@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Board
+    uniqueID: 2049389925
+    locked: 0
+  - name: Unit
+    uniqueID: 650740851
+    locked: 0

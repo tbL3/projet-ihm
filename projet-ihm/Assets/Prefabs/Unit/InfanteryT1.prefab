@@ -51,6 +51,7 @@ MonoBehaviour:
   y: 0
   unit: {fileID: 0}
   coroutineRunning: 0
+  map: {fileID: 0}
   visualMovementSpeed: 0.15
   animator: {fileID: 0}
   tileBeingOccupied: {fileID: 0}
@@ -83,7 +84,7 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3875801071116035673}
   m_Enabled: 1
-  m_SortingLayerID: -300653093
+  m_SortingLayerID: 650740851
   m_SortingLayer: 2
   m_SortingOrder: 1
 --- !u!1 &6863336430653836413

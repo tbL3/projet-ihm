@@ -10,25 +10,26 @@ public class UnitScript : MonoBehaviour
     public int x;
     public int y;
     public GameObject unit;
-    //This is a low tier idea, don't use it 
-    public bool coroutineRunning;
-
+    
+    public GridManager map;
     //Meta defining play here
     public Queue<int> movementQueue;
     public Queue<int> combatQueue;
     //This global variable is used to increase the units movementSpeed when travelling on the board
-    public float visualMovementSpeed = .15f;
-
+    public float visualMovementSpeed;
+    public List<Node> currentPath = null;
     //Animator
     public Animator animator;
 
-
+    public Vector2 target;
+    private float t;
     public GameObject tileBeingOccupied;
 
     public GameObject damagedParticle;
     //UnitStats
     public string unitName;
     public int moveRange = 2;
+    public float remainingMove;
     public int attackRange = 1;
     public int attackDamage = 1;
     public int maxHealthPoints = 5;
@@ -55,7 +56,7 @@ public class UnitScript : MonoBehaviour
     //Location for positional update
     public Transform startPoint;
     public Transform endPoint;
-    public float moveSpeedTime = 1f;
+    public float moveSpeedTime = 10f;
 
     //3D Model or 2D Sprite variables to check which version to use
     //Make sure only one of them are enabled in the inspector
@@ -93,33 +94,83 @@ public class UnitScript : MonoBehaviour
 
     private void Update()
     {
-        
+        t += Time.deltaTime / moveSpeedTime;
+        transform.position = Vector2.MoveTowards(transform.position, target, moveSpeedTime);
+        if (currentPath != null)
+        {
+
+            int currNode = 0;
+
+            while (currNode < currentPath.Count - 1)
+            {
+
+                Vector2 start = map.TileCoordToWorldCoord(currentPath[currNode].x, currentPath[currNode].y);
+                Vector2 end = map.TileCoordToWorldCoord(currentPath[currNode + 1].x, currentPath[currNode + 1].y);
+
+                Debug.DrawLine(start, end, Color.red);
+
+                currNode++;
+                
+            }
+            
+        }      
     }
-    private void Awake()
+    /*private void Awake()
     {
 
         animator = holder2D.GetComponent<Animator>();
         movementQueue = new Queue<int>();
         combatQueue = new Queue<int>();
 
-
         x = (int)transform.position.x;
         y = (int)transform.position.z;
         unitMoveState = movementStates.Unselected;
         currentHealthPoints = maxHealthPoints;
-        hitPointsText.SetText(currentHealthPoints.ToString());
+        //hitPointsText.SetText(currentHealthPoints.ToString());
 
+    }*/
 
+    public void MoveNextTile()
+    {
+        remainingMove = moveRange;
+
+        while (remainingMove > 0 && currentPath != null)
+        {
+            
+            if (currentPath == null)
+                return;
+
+            // Get cost from current tile to next tile
+            
+            remainingMove -= map.CostToEnterTile(currentPath[0].x, currentPath[0].y, currentPath[1].x, currentPath[1].y);
+            
+            
+            // Move us to the next tile in the sequence
+            x = currentPath[1].x;
+            y = currentPath[1].y;
+            
+            // Remove the old "current" tile
+            currentPath.RemoveAt(0);
+            if (currentPath.Count == 1)
+            {
+                // We only have one tile left in the path, and that tile MUST be our ultimate
+                // destination -- and we are standing on it!
+                // So let's just clear our pathfinding info.
+                currentPath = null;
+            }
+        }
+        target = new Vector2(x * 2, y * 2);
+        remainingMove = moveRange;
+        currentPath = null;
     }
-
-    public void LateUpdate()
+    /*public void LateUpdate()
     {
         healthBarCanvas.transform.forward = Camera.main.transform.forward;
         //damagePopupCanvas.transform.forward = Camera.main.transform.forward;
         holder2D.transform.forward = Camera.main.transform.forward;
     }
-
-    /*public void MoveNextTile()
+    
+    public void MoveNextTile()
     {
         if (path.Count == 0)
         {
@@ -268,36 +319,6 @@ public class UnitScript : MonoBehaviour
 
 
     }
-    /*public IEnumerator moveOverSeconds(GameObject objectToMove, Node endNode)
-    {
-        movementQueue.Enqueue(1);
-
-        //remove first thing on path because, its the tile we are standing on
-
-        path.RemoveAt(0);
-        while (path.Count != 0)
-        {
-
-            Vector3 endPos = map.tileCoordToWorldCoord(path[0].x, path[0].y);
-            objectToMove.transform.position = Vector3.Lerp(transform.position, endPos, visualMovementSpeed);
-            if ((transform.position - endPos).sqrMagnitude < 0.001)
-            {
-
-                path.RemoveAt(0);
-
-            }
-            yield return new WaitForEndOfFrame();
-        }
-        visualMovementSpeed = 0.15f;
-        transform.position = map.tileCoordToWorldCoord(endNode.x, endNode.y);
-
-        x = endNode.x;
-        y = endNode.y;
-        tileBeingOccupied.GetComponent<ClickableTileScript>().unitOnTile = null;
-        tileBeingOccupied = map.tilesOnMap[x, y];
-        movementQueue.Dequeue();
-
-    }*/
 
 
 
