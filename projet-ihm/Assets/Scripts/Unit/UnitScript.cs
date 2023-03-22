@@ -267,8 +267,9 @@ public class UnitScript : MonoBehaviour
     }
 
 
-    public void spawnUnit(int x, int y)
+    public static void spawnUnit(int x, int y)
     {
+        Debug.Log("spawn");
         Instantiate(Resources.Load("InfanteryT1"), new Vector3(x, y), Quaternion.identity);
     }
     public void unitDie()

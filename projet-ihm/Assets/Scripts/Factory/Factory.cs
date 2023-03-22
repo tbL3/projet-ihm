@@ -61,6 +61,7 @@ public class Factory : MonoBehaviour
 
     public static void OnNewTurn()
     {
+        Debug.Log("newTurn");
         if (remainingTurn > 1)
         {
             remainingTurn--;
@@ -74,7 +75,7 @@ public class Factory : MonoBehaviour
             }
             else
             {
-                //spawnUnit(currentUnitCreation);
+                UnitScript.spawnUnit(0, 0);
                 currentUnitCreation = null;
                 DisableBubble();
             }
