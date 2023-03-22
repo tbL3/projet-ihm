@@ -6,16 +6,20 @@ using UnityEngine.UI;
 
 public class Factory : MonoBehaviour
 {
-    private static GameObject canvas;
-    private static GameObject bubble;
-    private static SpriteRenderer bubbleImage;
-    private static int remainingTurn;
-    private static string currentResearch;
-    private static string currentUnitCreation;
-    private static Sprite[] soldierSprite;
-    private static Sprite[] tankSprite;
-    private static Sprite[] planeSprite;
-    private static Dictionary<string, int> unitTime= new Dictionary<string, int>()
+    private GameObject canvas;
+    private GameObject canvasPopup;
+    private GameObject bubble;
+    private SpriteRenderer bubbleImage;
+    private int remainingTurn;
+    private string currentResearch;
+    private string currentUnitCreation;
+    private string waitingResponseFor;
+    private Button yesButton;
+    private Button noButton;
+    private Sprite[] soldierSprite;
+    private Sprite[] tankSprite;
+    private Sprite[] planeSprite;
+    private Dictionary<string, int> unitTime= new Dictionary<string, int>()
     {
         {"soldier",2 },
         {"tank", 4 },
@@ -28,7 +32,7 @@ public class Factory : MonoBehaviour
 
     // Start is called before the first frame update
 
-    public static int getRemainingTurn()
+    public int getRemainingTurn()
     {
         return remainingTurn;
     }
@@ -40,17 +44,26 @@ public class Factory : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("start awake");
         canvas = GameObject.Find("CanvasModalWindowFactory");
         bubble = GameObject.Find("bubble");
         GameObject obj = GameObject.Find("bubbleImage");
+        canvasPopup =  GameObject.Find("canvasPopup");
         bubbleImage = obj.GetComponent<SpriteRenderer>();
-        canvas.SetActive(false);
-        DisableBubble();
         soldierSprite = Resources.LoadAll<Sprite>("soldier");
         tankSprite = Resources.LoadAll<Sprite>("tank");
         planeSprite = Resources.LoadAll<Sprite>("plane");
+        GameObject obj1 = GameObject.Find("yesButton");
+        GameObject obj2 = GameObject.Find("noButton");
+        yesButton = obj1.GetComponent<Button>();
+        noButton = obj2.GetComponent<Button>();
+        yesButton.onClick.AddListener(() => DisablePopup(true));
+        noButton.onClick.AddListener(() => DisablePopup(false));
 
-        
+        canvas.SetActive(false);
+        DisableBubble();
+        DisablePopup(false);
+        Debug.Log("fall asleep");
     }
 
     // Update is called once per frame
@@ -59,7 +72,7 @@ public class Factory : MonoBehaviour
      
     }
 
-    public static void OnNewTurn()
+    public void OnNewTurn()
     {
         Debug.Log("newTurn");
         if (remainingTurn > 1)
@@ -92,7 +105,7 @@ public class Factory : MonoBehaviour
 
     }
 
-    public static void createUnit(string unit)
+    public void createUnit(string unit)
     {
         currentUnitCreation = unit;
         remainingTurn = unitTime[unit];
@@ -102,13 +115,13 @@ public class Factory : MonoBehaviour
         Debug.Log("currentCreation" + currentUnitCreation + "reaminingTurn" + remainingTurn);
     }
 
-    public static void closeModal()
+    public void closeModal()
     {
         FactoryPanel.openBoth();
         canvas.SetActive(false);
     }
 
-    public static void SetBubbleImage(string unit)
+    public void SetBubbleImage(string unit)
     {
         switch (unit)
         {
@@ -127,14 +140,32 @@ public class Factory : MonoBehaviour
         }
     }
 
-    public static void EnableBubble()
+    public void EnableBubble()
     {
         bubble.SetActive(true);
     }
 
-    public static void DisableBubble()
+    public void DisableBubble()
     {
         bubble.SetActive(false);
+    }
+
+    public void EnablePopup(string unit)
+    {
+        canvasPopup.SetActive(true);
+        waitingResponseFor = unit;
+    }
+
+    public void DisablePopup(Boolean my_bool)
+    {
+        if (my_bool)
+        {
+            Debug.Log("c'est true");
+            createUnit(waitingResponseFor);
+            canvas.SetActive(false);
+        }
+        Debug.Log("c'est false");
+        canvasPopup.SetActive(false);
     }
 
 
