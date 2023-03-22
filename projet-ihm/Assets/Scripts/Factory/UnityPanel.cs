@@ -13,6 +13,7 @@ public class UnityPanel : MonoBehaviour
     Button Button5;
     Button Button6;
     static public GameObject unityPanel;
+    [SerializeField] private Factory factory;
 
     public enum UnitType
     {
@@ -62,13 +63,14 @@ public class UnityPanel : MonoBehaviour
 
     public void CreateUnit(string unit)
     {
-        if(Factory.getRemainingTurn() > 0)
+        if(factory.getRemainingTurn() > 0)
         {
-            //popup
+            factory.EnablePopup(unit);
+            
         }
         else
         {
-            Factory.createUnit(unit);
+            factory.createUnit(unit);
         }
     }
 }

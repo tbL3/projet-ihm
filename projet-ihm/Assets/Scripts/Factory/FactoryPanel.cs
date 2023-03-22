@@ -11,6 +11,7 @@ public class FactoryPanel : MonoBehaviour
     public Button unityButton;
     static public GameObject unityPanel;
     static public GameObject researchPanel;
+    [SerializeField] private Factory factory;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,7 @@ public class FactoryPanel : MonoBehaviour
         crossButton = obj.GetComponent<Button>();
         unityButton = obj2.GetComponent<Button>();
         researchButton = obj3.GetComponent<Button>();
-        crossButton.onClick.AddListener(Factory.closeModal);
+        crossButton.onClick.AddListener(factory.closeModal);
         unityButton.onClick.AddListener(openUnity);
         researchButton.onClick.AddListener(openResearch);
     }
