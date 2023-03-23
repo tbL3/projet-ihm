@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,7 @@ public class FactoryPanel : MonoBehaviour
     private Button Button4;
     private Button Button5;
     private Button Button6;
+    private TMP_Text myText;
     [SerializeField] private GameObject myFactory;
 
     public enum UnitType
@@ -83,6 +85,7 @@ public class FactoryPanel : MonoBehaviour
     }
     public void closeModal()
     {
+        Debug.Log("closing mdoal");
         openBoth();
         DisableCanevas();
     }
@@ -108,34 +111,33 @@ public class FactoryPanel : MonoBehaviour
 
     public void EnableCanevas()
     {
-        Debug.Log("activation du canevas");
         canevas.SetActive(true);
     }
 
     //permet de décroitre le nombre de tour nécéssaire à la création de l'unité à mesure que l'on avance dans les tours
     //(quand une création est en cours) 
-    /*public void changeTimeDisplay(string unit)
+    public void changeTimeDisplay(string unit)
     {
-        //la référence du texte indiquant le nombre de tour nécéssaire est = au nom de l'unité + TimeText
-        GameObject obj = GameObject.Find(unit + "TimeText");
-        Text uiText = obj.GetComponent<Text>();
-        uiText.text = "test";
-    }*/
+        //la référence du texte indiquant le nombre de tour nécéssaire est = au nom de l'unité + TimeText 
+        myText = GameObject.Find(unit + "TimeText").GetComponent<TMP_Text>();
+        myText.text = (int.Parse(myText.text) - 1).ToString();
+    }
+    public void restoreTimeDisplay(int time, string unit)
+    {
+        myText = GameObject.Find(unit + "TimeText").GetComponent<TMP_Text>();
+        myText.text = time.ToString();
+    }
 
     public void CreateUnit(string unit)
     {
-        Debug.Log("CreateUnit button trigger");
-        Debug.Log("my unit" + unit);
+        Debug.Log(myFactory.GetComponent<Factory>().getRemainingTurn() > 0);
         if (myFactory.GetComponent<Factory>().getRemainingTurn() > 0)
         {
-            Debug.Log("deuxieme entrée ?");
-            Debug.Log(myFactory.GetComponent<Factory>().getRemainingTurn());
             myFactory.GetComponent<Factory>().EnablePopup(unit);
-
         }
         else
         {
-            Debug.Log("wtf is that");
+            Debug.Log("enter else ");
             myFactory.GetComponent<Factory>().createUnit(unit);
         }
     }

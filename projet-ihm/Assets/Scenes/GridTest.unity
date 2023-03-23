@@ -492,7 +492,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 297236477}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -508,7 +508,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 0.79671234, g: 0.79045033, b: 0.8773585, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -529,6 +529,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &297236486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297236477}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f34d507c5b1316499ad23c20a9cb9c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myFactory: {fileID: 1184987933}
 --- !u!1001 &362373997
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -805,9 +818,29 @@ PrefabInstance:
       propertyPath: myFactory
       value: 
       objectReference: {fileID: 1184987933}
+    - target: {fileID: 2655236877366263129, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2655236877374605312, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2655236877399365169, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2655236877790125945, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
       propertyPath: factory
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2655236878319237976, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2655236878603391487, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2655236877790125945, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
