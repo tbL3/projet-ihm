@@ -1,0 +1,50 @@
+{
+    "items" : [
+        {
+            "key" : "unityButton",
+            "value" : "Unit"
+        },
+        {
+            "key" : "researchButton",
+            "value" : "research"
+        },
+        {
+            "key" : "unitNameSoldier",
+            "value" : "soldier"
+        },
+        {
+            "key" : "unitNameReinforcedSoldier",
+            "value" : "reinforced soldier"
+        },
+        {
+            "key" : "unitNamePlane",
+            "value" : "plane"
+        },{
+            "key" : "unitNameTank",
+            "value" : "tank"
+        },
+        {
+            "key" : "unitNameReinforcedPlane",
+            "value" : "reinforced plane"
+        },
+        {
+            "key" : "unitNameReinforcedTank",
+            "value" : "reinforced tank"
+        }, 
+        {
+            "key" : "skipTurnText",
+            "value" : "Skip Turn"
+        },
+        {
+            "key" : "popUpNoText",
+            "value" : "no"
+        },{
+            "key" : "popUpYesText",
+            "value" : "yes"
+        },
+        {
+            "key" : "message",
+            "value" : "Are you sure you want to start to create this unit? This will stop privious unit creation !!"
+        }      
+    ]
+}

@@ -1,0 +1,50 @@
+{
+    "items" : [
+        {
+            "key" : "unityButton",
+            "value" : "Unité"
+        },
+        {
+            "key" : "researchButton",
+            "value" : "recherche"
+        },
+        {
+            "key" : "unitNameSoldier",
+            "value" : "infantrie"
+        },
+        {
+            "key" : "unitNameReinforcedSoldier",
+            "value" : "infantrie d'élite"
+        },
+        {
+            "key" : "unitNamePlane",
+            "value" : "avion"
+        },{
+            "key" : "unitNameTank",
+            "value" : "char"
+        },
+        {
+            "key" : "unitNameReinforcedPlane",
+            "value" : "avion renforcé"
+        },
+        {
+            "key" : "unitNameReinforcedTank",
+            "value" : "char lourd"
+        }, 
+        {
+            "key" : "skipTurnText",
+            "value" : "Tour Suivant"
+        },
+        {
+            "key" : "popUpNoText",
+            "value" : "non"
+        },{
+            "key" : "popUpYesText",
+            "value" : "oui"
+        },
+        {
+            "key" : "message",
+            "value" : "Etes vous sure de vouloir créer cette unitée ? Cela arrêteras la création d'unité précédente !!"
+        }      
+    ]
+}
