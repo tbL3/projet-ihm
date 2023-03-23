@@ -6,20 +6,16 @@ using UnityEngine.UI;
 
 public class Factory : MonoBehaviour
 {
-    private GameObject canvas;
-    private GameObject canvasPopup;
-    private GameObject bubble;
-    private SpriteRenderer bubbleImage;
+    private static GameObject canvasPopup;
     private int remainingTurn;
     private string currentResearch;
     private string currentUnitCreation;
     private string waitingResponseFor;
     private Button yesButton;
     private Button noButton;
-    private Sprite[] soldierSprite;
-    private Sprite[] tankSprite;
-    private Sprite[] planeSprite;
-    private Dictionary<string, int> unitTime= new Dictionary<string, int>()
+    [SerializeField] public GameObject PanelManager;
+    [SerializeField] public GameObject myBubble;
+    private Dictionary<string, int> unitTime = new Dictionary<string, int>()
     {
         {"soldier",2 },
         {"tank", 4 },
@@ -28,7 +24,7 @@ public class Factory : MonoBehaviour
         {"reinforceTank", 5 },
         {"reinforcedPlane", 7 }
     };
-    
+
 
     // Start is called before the first frame update
 
@@ -36,33 +32,27 @@ public class Factory : MonoBehaviour
     {
         return remainingTurn;
     }
+    public string getCurrentCreation()
+    {
+        return this.currentUnitCreation;
+    }
 
     void Start()
     {
-        
+        DisablePopup(false);
     }
 
     void Awake()
     {
-        Debug.Log("start awake");
-        canvas = GameObject.Find("CanvasModalWindowFactory");
-        bubble = GameObject.Find("bubble");
-        GameObject obj = GameObject.Find("bubbleImage");
-        canvasPopup =  GameObject.Find("canvasPopup");
-        bubbleImage = obj.GetComponent<SpriteRenderer>();
-        soldierSprite = Resources.LoadAll<Sprite>("soldier");
-        tankSprite = Resources.LoadAll<Sprite>("tank");
-        planeSprite = Resources.LoadAll<Sprite>("plane");
+        Debug.Log("start awake");     
+        canvasPopup = GameObject.Find("canvasPopup");
         GameObject obj1 = GameObject.Find("yesButton");
         GameObject obj2 = GameObject.Find("noButton");
         yesButton = obj1.GetComponent<Button>();
         noButton = obj2.GetComponent<Button>();
         yesButton.onClick.AddListener(() => DisablePopup(true));
         noButton.onClick.AddListener(() => DisablePopup(false));
-
-        canvas.SetActive(false);
-        DisableBubble();
-        DisablePopup(false);
+        myBubble.GetComponent<Bubble>().DisableBubble();
         Debug.Log("fall asleep");
     }
 
@@ -78,6 +68,7 @@ public class Factory : MonoBehaviour
         if (remainingTurn > 1)
         {
             remainingTurn--;
+            //PanelManager.GetComponent<FactoryPanel>().changeTimeDisplay(currentUnitCreation);
         }
         else if (remainingTurn == 1)
         {
@@ -90,7 +81,7 @@ public class Factory : MonoBehaviour
             {
                 UnitScript.spawnUnit(0, 0);
                 currentUnitCreation = null;
-                DisableBubble();
+                myBubble.GetComponent<Bubble>().DisableBubble();
             }
             remainingTurn = 0;
         }
@@ -98,56 +89,21 @@ public class Factory : MonoBehaviour
 
     private void OnMouseDown()
     {
-        canvas.SetActive(true);
-        FactoryPanel.openUnity();
         Debug.Log("bbb");
-        EnableBubble();
-
+        PanelManager.GetComponent<FactoryPanel>().EnableCanevas();
+        PanelManager.GetComponent<FactoryPanel>().openUnity();
+        myBubble.GetComponent<Bubble>().EnableBubble();
     }
 
     public void createUnit(string unit)
     {
+        Debug.Log("ah bon ?");
         currentUnitCreation = unit;
         remainingTurn = unitTime[unit];
-        EnableBubble();
-        SetBubbleImage(unit);
-        closeModal();
+        myBubble.GetComponent<Bubble>().EnableBubble();
+        myBubble.GetComponent<Bubble>().SetBubbleImage(unit);
+        PanelManager.GetComponent<FactoryPanel>().closeModal();
         Debug.Log("currentCreation" + currentUnitCreation + "reaminingTurn" + remainingTurn);
-    }
-
-    public void closeModal()
-    {
-        FactoryPanel.openBoth();
-        canvas.SetActive(false);
-    }
-
-    public void SetBubbleImage(string unit)
-    {
-        switch (unit)
-        {
-            case "soldier":
-                bubbleImage.sprite = soldierSprite[0];
-                break;
-            case "tank":
-                bubbleImage.sprite = tankSprite[0];
-                break;
-            case "plane":
-                bubbleImage.sprite = planeSprite[0];
-                break;
-            default:
-                Debug.Log("something wrong");
-                break;
-        }
-    }
-
-    public void EnableBubble()
-    {
-        bubble.SetActive(true);
-    }
-
-    public void DisableBubble()
-    {
-        bubble.SetActive(false);
     }
 
     public void EnablePopup(string unit)
@@ -162,7 +118,7 @@ public class Factory : MonoBehaviour
         {
             Debug.Log("c'est true");
             createUnit(waitingResponseFor);
-            canvas.SetActive(false);
+            PanelManager.GetComponent<FactoryPanel>().DisableCanevas();
         }
         Debug.Log("c'est false");
         canvasPopup.SetActive(false);

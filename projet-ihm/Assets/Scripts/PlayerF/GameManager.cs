@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     private Button skipTurn;
-    [SerializeField] private Factory factory;
+    [SerializeField] private GameObject myFactory;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     {
         GameObject obj = GameObject.Find("skipTurnButton");
         skipTurn = obj.GetComponent<Button>();
-        skipTurn.onClick.AddListener(() => factory.OnNewTurn());
+        skipTurn.onClick.AddListener(() => myFactory.GetComponent<Factory>().OnNewTurn());
     }
 
 
