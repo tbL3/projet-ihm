@@ -24,6 +24,7 @@ public class Factory : MonoBehaviour
         {"reinforceTank", 5 },
         {"reinforcedPlane", 7 }
     };
+    private static int unitType;
     
 
     // Start is called before the first frame update
@@ -75,7 +76,7 @@ public class Factory : MonoBehaviour
             }
             else
             {
-                UnitScript.spawnUnit(0, 0);
+                UnitScript.spawnUnit(0, 0, unitType);
                 currentUnitCreation = null;
                 DisableBubble();
             }
@@ -95,6 +96,18 @@ public class Factory : MonoBehaviour
     public static void createUnit(string unit)
     {
         currentUnitCreation = unit;
+        switch (currentUnitCreation)
+        {
+            case "soldier":
+                unitType = 1;
+                break;
+            case "tank":
+                unitType = 2;
+                break;
+            case "plane":
+                unitType = 3;
+                break;
+        }
         remainingTurn = unitTime[unit];
         EnableBubble();
         SetBubbleImage(unit);

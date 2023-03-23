@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
 
 public class UnitScript : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class UnitScript : MonoBehaviour
     public int x;
     public int y;
     public GameObject unit;
-    
+    private static Player unitPlayer;
     public GridManager map;
     //Meta defining play here
     public Queue<int> movementQueue;
@@ -79,6 +80,7 @@ public class UnitScript : MonoBehaviour
     }
     public movementStates unitMoveState;
 
+    public static Dictionary<int, Object> unitTypes;
     //Pathfinding
 
     //public List<Node> path = null;
@@ -88,8 +90,13 @@ public class UnitScript : MonoBehaviour
     public bool completedMovement = false;
 
     private void Start()
-    {   
-        
+    {
+        unitTypes = new Dictionary<int, Object>()
+    {
+        {1,Resources.Load("InfanteryT1") },
+        {2,Resources.Load("TankT1") },
+        {3,Resources.Load("PlaneT1") }
+    };
     }
 
     private void Update()
@@ -130,10 +137,16 @@ public class UnitScript : MonoBehaviour
 
     }*/
 
-    public void MoveNextTile()
+    private void OnMouseDown()
+    {
+        map.GetComponent<GridManager>().selectedUnit = unit;
+    }
+    public void OnNewTurn()
     {
         remainingMove = moveRange;
-
+    }
+    public void MoveNextTile()
+    {
         while (remainingMove > 0 && currentPath != null)
         {
             
@@ -160,8 +173,8 @@ public class UnitScript : MonoBehaviour
             }
         }
         target = new Vector2(x * 2, y * 2);
-        remainingMove = moveRange;
         currentPath = null;
+        
     }
     /*public void LateUpdate()
     {
@@ -267,10 +280,14 @@ public class UnitScript : MonoBehaviour
     }
 
 
-    public static void spawnUnit(int x, int y)
+    public static void spawnUnit(int x, int y, int type)
     {
-        Debug.Log("spawn");
-        Instantiate(Resources.Load("InfanteryT1"), new Vector3(x, y), Quaternion.identity);
+        GameObject unit = (GameObject)Instantiate(unitTypes[type], new Vector2(x*2, y*2), Quaternion.identity /*,map.stockUnits.transform*/);
+        unitPlayer.playerUnits.Add(unit);
+        SortingGroup sg = unit.AddComponent<SortingGroup>();
+        //unit.GetComponent<UnitScript>().map =
+        Debug.Log(SortingLayer.layers[2].id);
+        sg.sortingLayerName = "Unit";
     }
     public void unitDie()
     {

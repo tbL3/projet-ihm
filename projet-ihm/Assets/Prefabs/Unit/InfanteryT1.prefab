@@ -49,19 +49,20 @@ MonoBehaviour:
   teamNum: 1
   x: 0
   y: 0
-  unit: {fileID: 0}
-  coroutineRunning: 0
+  stockUnits: {fileID: 0}
   map: {fileID: 0}
-  visualMovementSpeed: 0.15
+  visualMovementSpeed: 0
   animator: {fileID: 0}
+  target: {x: 0, y: 0}
   tileBeingOccupied: {fileID: 0}
   damagedParticle: {fileID: 0}
   unitName: Infanterie
   moveRange: 2
+  remainingMove: 0
   attackRange: 1
   attackDamage: 1
   maxHealthPoints: 5
-  currentHealthPoints: 5
+  currentHealthPoints: 0
   unitSprite: {fileID: 21300000, guid: d81e2e136bece5544a97874978e53677, type: 3}
   healthBarCanvas: {fileID: 0}
   hitPointsText: {fileID: 0}
@@ -71,8 +72,8 @@ MonoBehaviour:
   damageBackdrop: {fileID: 0}
   startPoint: {fileID: 0}
   endPoint: {fileID: 0}
-  moveSpeedTime: 1
-  holder2D: {fileID: 3875801071116035673}
+  moveSpeedTime: 10
+  holder2D: {fileID: 0}
   unitInMovement: 0
   unitMoveState: 0
   completedMovement: 0
@@ -86,7 +87,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 650740851
   m_SortingLayer: 2
-  m_SortingOrder: 1
+  m_SortingOrder: 0
 --- !u!1 &6863336430653836413
 GameObject:
   m_ObjectHideFlags: 0
