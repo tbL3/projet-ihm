@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
 
     public List<GameObject> playerUnits;
     private Button skipTurn;
+    [SerializeField] private GameObject myFactory;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
         {
             skipTurn.onClick.AddListener(() => unit.GetComponent<UnitScript>().OnNewTurn());
         }
+        skipTurn.onClick.AddListener(() => myFactory.GetComponent<Factory>().OnNewTurn());
     }
 
 

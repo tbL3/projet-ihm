@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Tile : MonoBehaviour
 {
@@ -41,8 +42,14 @@ public class Tile : MonoBehaviour
 
     void OnMouseUp()
     {
-        Debug.Log("Click!");
-
-        map.GeneratePathTo(tileX, tileY);
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("Clicked on the UI");
+        }
+        else
+        {
+            Debug.Log("Click!");
+            map.GeneratePathTo(tileX, tileY);
+        }
     }
 }

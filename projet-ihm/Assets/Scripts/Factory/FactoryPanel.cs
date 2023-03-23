@@ -6,31 +6,68 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class FactoryPanel : MonoBehaviour
 {
-    public Button crossButton;
-    public Button researchButton;
-    public Button unityButton;
-    static public GameObject unityPanel;
-    static public GameObject researchPanel;
+    private GameObject unityPanel;
+    private GameObject researchPanel;
+    private GameObject canevas;
+    private Button crossButton;
+    private Button researchButton;
+    private Button unityButton;
+    private Button Button1;
+    private Button Button2;
+    private Button Button3;
+    private Button Button4;
+    private Button Button5;
+    private Button Button6;
+    [SerializeField] private GameObject myFactory;
+
+    public enum UnitType
+    {
+        soldier,
+        reinforcedSoldier,
+        tank,
+        reinforcedTank,
+        plane,
+        reinforcedPlane,
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        DisableCanevas();
     }
 
     void OnEnable()
     {
+        canevas = GameObject.Find("CanvasModalWindowFactory");
         unityPanel = GameObject.Find("unityPanel");
         researchPanel = GameObject.Find("researchPanel");
         GameObject obj = GameObject.Find("crossButton");
         GameObject obj2 = GameObject.Find("unityButton");
         GameObject obj3= GameObject.Find("researchButton");
+        GameObject obj4 = GameObject.Find("invisibleButton1");
+        GameObject obj5 = GameObject.Find("invisibleButton2");
+        GameObject obj6 = GameObject.Find("invisibleButton3");
+        GameObject obj7 = GameObject.Find("invisibleButton4");
+        GameObject obj8 = GameObject.Find("invisibleButton5");
+        GameObject obj9 = GameObject.Find("invisibleButton6");
         crossButton = obj.GetComponent<Button>();
         unityButton = obj2.GetComponent<Button>();
         researchButton = obj3.GetComponent<Button>();
-        crossButton.onClick.AddListener(Factory.closeModal);
+        Button1 = obj4.GetComponent<Button>();
+        Button2 = obj5.GetComponent<Button>();
+        Button3 = obj6.GetComponent<Button>();
+        Button4 = obj7.GetComponent<Button>();
+        Button5 = obj8.GetComponent<Button>();
+        Button6 = obj9.GetComponent<Button>();
+        crossButton.onClick.AddListener(closeModal);
         unityButton.onClick.AddListener(openUnity);
         researchButton.onClick.AddListener(openResearch);
+        Button1.onClick.AddListener(() => CreateUnit("soldier"));
+        Button2.onClick.AddListener(() => CreateUnit("tank"));
+        Button3.onClick.AddListener(() => CreateUnit("plane"));
+        Button4.onClick.AddListener(() => CreateUnit("reinforcedSoldier"));
+        Button5.onClick.AddListener(() => CreateUnit("reinforcedTank"));
+        Button6.onClick.AddListener(() => CreateUnit("reinforcedPlane"));
     }
 
     // Update is called once per frame
@@ -39,13 +76,18 @@ public class FactoryPanel : MonoBehaviour
         
     }
 
-    public static void openUnity()
+    public void openUnity()
     {
         unityPanel.SetActive(true);
         researchPanel.SetActive(false);
     }
+    public void closeModal()
+    {
+        openBoth();
+        DisableCanevas();
+    }
 
-    public static void openResearch()
+    public void openResearch()
     {     
         unityPanel.SetActive(false);
         researchPanel.SetActive(true);
@@ -53,9 +95,49 @@ public class FactoryPanel : MonoBehaviour
 
     //si les panel sont setActive(false) au moment ou le canvas est fermer alors à la reouveture de ce dernier une erreur va être lever
     //la fonction openBoth permet à la classe Factory de réactiver les deux panel avant de fermer le canvas
-    public static void openBoth()
+    public void openBoth()
     {
         unityPanel.SetActive(true);
         researchPanel.SetActive(true);
     }
+
+    public void DisableCanevas()
+    {
+        canevas.SetActive(false);
+    }
+
+    public void EnableCanevas()
+    {
+        Debug.Log("activation du canevas");
+        canevas.SetActive(true);
+    }
+
+    //permet de décroitre le nombre de tour nécéssaire à la création de l'unité à mesure que l'on avance dans les tours
+    //(quand une création est en cours) 
+    /*public void changeTimeDisplay(string unit)
+    {
+        //la référence du texte indiquant le nombre de tour nécéssaire est = au nom de l'unité + TimeText
+        GameObject obj = GameObject.Find(unit + "TimeText");
+        Text uiText = obj.GetComponent<Text>();
+        uiText.text = "test";
+    }*/
+
+    public void CreateUnit(string unit)
+    {
+        Debug.Log("CreateUnit button trigger");
+        Debug.Log("my unit" + unit);
+        if (myFactory.GetComponent<Factory>().getRemainingTurn() > 0)
+        {
+            Debug.Log("deuxieme entrée ?");
+            Debug.Log(myFactory.GetComponent<Factory>().getRemainingTurn());
+            myFactory.GetComponent<Factory>().EnablePopup(unit);
+
+        }
+        else
+        {
+            Debug.Log("wtf is that");
+            myFactory.GetComponent<Factory>().createUnit(unit);
+        }
+    }
+
 }
