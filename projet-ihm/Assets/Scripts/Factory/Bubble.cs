@@ -41,9 +41,14 @@ public class Bubble : MonoBehaviour
 
     public void SetBubbleImage(string unit)
     {
+        if (unit.Contains("reinforced"))
+        {
+            unit = unit.Split("reinforced")[1].ToLower();
+        }
+        Debug.Log(unit + "aaaaa");
         switch (unit)
         {
-            case "soldier":
+            case "soldier" :
                 bubbleImage.sprite = soldierSprite[0];
                 break;
             case "tank":
@@ -53,7 +58,6 @@ public class Bubble : MonoBehaviour
                 bubbleImage.sprite = planeSprite[0];
                 break;
             default:
-                Debug.Log("something wrong");
                 break;
         }
     }

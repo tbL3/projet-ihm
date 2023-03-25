@@ -21,7 +21,7 @@ public class Factory : MonoBehaviour
         {"tank", 4 },
         {"plane", 8 },
         {"reinforcedSoldier", 3 },
-        {"reinforceTank", 5 },
+        {"reinforcedTank", 5 },
         {"reinforcedPlane", 7 }
     };
     private int unitType;
@@ -46,8 +46,7 @@ public class Factory : MonoBehaviour
     }
 
     void Awake()
-    {
-        Debug.Log("start awake");     
+    {  
         canvasPopup = GameObject.Find("canvasPopup");
         GameObject obj1 = GameObject.Find("yesButton");
         GameObject obj2 = GameObject.Find("noButton");
@@ -56,7 +55,6 @@ public class Factory : MonoBehaviour
         yesButton.onClick.AddListener(() => DisablePopup(true));
         noButton.onClick.AddListener(() => DisablePopup(false));
         myBubble.GetComponent<Bubble>().DisableBubble();
-        Debug.Log("fall asleep");
     }
 
     // Update is called once per frame
@@ -67,11 +65,10 @@ public class Factory : MonoBehaviour
 
     public void OnNewTurn()
     {
-        Debug.Log("newTurn");
         if (remainingTurn > 1)
         {
             remainingTurn--;
-            //PanelManager.GetComponent<FactoryPanel>().changeTimeDisplay(currentUnitCreation);
+            PanelManager.GetComponent<FactoryPanel>().changeTimeDisplay(currentUnitCreation);
         }
         else if (remainingTurn == 1)
         {
@@ -83,8 +80,9 @@ public class Factory : MonoBehaviour
             else
             {
                 spawner.GetComponent<Spawner>().SpawnUnit(0, 0, unitType);
-                currentUnitCreation = null;
                 myBubble.GetComponent<Bubble>().DisableBubble();
+                PanelManager.GetComponent<FactoryPanel>().restoreTimeDisplay(unitTime[currentUnitCreation], currentUnitCreation);
+                currentUnitCreation = null;
             }
             remainingTurn = 0;
         }
@@ -92,10 +90,8 @@ public class Factory : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("bbb");
         PanelManager.GetComponent<FactoryPanel>().EnableCanevas();
         PanelManager.GetComponent<FactoryPanel>().openUnity();
-        myBubble.GetComponent<Bubble>().EnableBubble();
     }
 
     public void createUnit(string unit)
@@ -132,11 +128,9 @@ public class Factory : MonoBehaviour
     {
         if (my_bool)
         {
-            Debug.Log("c'est true");
             createUnit(waitingResponseFor);
             PanelManager.GetComponent<FactoryPanel>().DisableCanevas();
         }
-        Debug.Log("c'est false");
         canvasPopup.SetActive(false);
     }
 
