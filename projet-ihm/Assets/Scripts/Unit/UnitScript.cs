@@ -10,13 +10,13 @@ public class UnitScript : MonoBehaviour
     public int teamNum;
     public int x;
     public int y;
-    public GameObject unit;
-    private static Player unitPlayer;
-    public GridManager map;
+    public GameObject map;
+    
     //Meta defining play here
     public Queue<int> movementQueue;
     public Queue<int> combatQueue;
     //This global variable is used to increase the units movementSpeed when travelling on the board
+
     public float visualMovementSpeed;
     public List<Node> currentPath = null;
     //Animator
@@ -36,6 +36,7 @@ public class UnitScript : MonoBehaviour
     public int maxHealthPoints = 5;
     public int currentHealthPoints;
     public Sprite unitSprite;
+
 
     [Header("UI Elements")]
     //Unity UI References
@@ -80,7 +81,7 @@ public class UnitScript : MonoBehaviour
     }
     public movementStates unitMoveState;
 
-    public static Dictionary<int, Object> unitTypes;
+    public static Dictionary<int, Object> unitTypes = new Dictionary<int, Object>();
     //Pathfinding
 
     //public List<Node> path = null;
@@ -91,12 +92,9 @@ public class UnitScript : MonoBehaviour
 
     private void Start()
     {
-        unitTypes = new Dictionary<int, Object>()
-    {
-        {1,Resources.Load("InfanteryT1") },
-        {2,Resources.Load("TankT1") },
-        {3,Resources.Load("PlaneT1") }
-    };
+
+        
+
     }
 
     private void Update()
@@ -111,8 +109,8 @@ public class UnitScript : MonoBehaviour
             while (currNode < currentPath.Count - 1)
             {
 
-                Vector2 start = map.TileCoordToWorldCoord(currentPath[currNode].x, currentPath[currNode].y);
-                Vector2 end = map.TileCoordToWorldCoord(currentPath[currNode + 1].x, currentPath[currNode + 1].y);
+                Vector2 start = map.GetComponent<GridManager>().TileCoordToWorldCoord(currentPath[currNode].x, currentPath[currNode].y);
+                Vector2 end = map.GetComponent<GridManager>().TileCoordToWorldCoord(currentPath[currNode + 1].x, currentPath[currNode + 1].y);
 
                 Debug.DrawLine(start, end, Color.red);
 
@@ -139,10 +137,14 @@ public class UnitScript : MonoBehaviour
 
     private void OnMouseDown()
     {
-        map.GetComponent<GridManager>().selectedUnit = unit;
+        // Faites quelque chose avec l'objet cliqué
+        Debug.Log("Objet cliqué : " + map.GetComponent<GridManager>().name);
+        map.GetComponent<GridManager>().selectedUnit = gameObject;
+
     }
     public void OnNewTurn()
     {
+        Debug.Log("Click");
         remainingMove = moveRange;
     }
     public void MoveNextTile()
@@ -155,7 +157,7 @@ public class UnitScript : MonoBehaviour
 
             // Get cost from current tile to next tile
             
-            remainingMove -= map.CostToEnterTile(currentPath[0].x, currentPath[0].y, currentPath[1].x, currentPath[1].y);
+            remainingMove -= map.GetComponent<GridManager>().CostToEnterTile(currentPath[0].x, currentPath[0].y, currentPath[1].x, currentPath[1].y);
             
             
             // Move us to the next tile in the sequence
@@ -280,15 +282,6 @@ public class UnitScript : MonoBehaviour
     }
 
 
-    public static void spawnUnit(int x, int y, int type)
-    {
-        GameObject unit = (GameObject)Instantiate(unitTypes[type], new Vector2(x*2, y*2), Quaternion.identity /*,map.stockUnits.transform*/);
-        unitPlayer.playerUnits.Add(unit);
-        SortingGroup sg = unit.AddComponent<SortingGroup>();
-        //unit.GetComponent<UnitScript>().map =
-        Debug.Log(SortingLayer.layers[2].id);
-        sg.sortingLayerName = "Unit";
-    }
     public void unitDie()
     {
         if (holder2D.activeSelf)

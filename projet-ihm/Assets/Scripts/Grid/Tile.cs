@@ -48,8 +48,11 @@ public class Tile : MonoBehaviour
         }
         else
         {
-            Debug.Log("Click!");
-            map.GeneratePathTo(tileX, tileY);
+            if(map.selectedUnit != null)
+            {
+                map.GeneratePathTo(tileX, tileY);
+            }
+            
         }
     }
 }

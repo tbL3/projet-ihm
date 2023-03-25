@@ -24,7 +24,8 @@ public class Factory : MonoBehaviour
         {"reinforceTank", 5 },
         {"reinforcedPlane", 7 }
     };
-    private static int unitType;
+    private int unitType;
+    public GameObject spawner;
     
 
 
@@ -81,7 +82,7 @@ public class Factory : MonoBehaviour
             }
             else
             {
-                UnitScript.spawnUnit(0, 0, unitType);
+                spawner.GetComponent<Spawner>().SpawnUnit(0, 0, unitType);
                 currentUnitCreation = null;
                 myBubble.GetComponent<Bubble>().DisableBubble();
             }
@@ -100,6 +101,7 @@ public class Factory : MonoBehaviour
     public void createUnit(string unit)
     {
         Debug.Log("ah bon ?");
+        Debug.Log(unit);
         currentUnitCreation = unit;
         switch (currentUnitCreation)
         {
