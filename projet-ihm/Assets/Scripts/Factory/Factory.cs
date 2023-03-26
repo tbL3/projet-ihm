@@ -24,6 +24,9 @@ public class Factory : MonoBehaviour
         {"reinforcedTank", 5 },
         {"reinforcedPlane", 7 }
     };
+    private int unitType;
+    public GameObject spawner;
+    
 
 
     // Start is called before the first frame update
@@ -76,7 +79,7 @@ public class Factory : MonoBehaviour
             }
             else
             {
-                UnitScript.spawnUnit(0, 0);              
+                spawner.GetComponent<Spawner>().SpawnUnit(0, 0, unitType);
                 myBubble.GetComponent<Bubble>().DisableBubble();
                 PanelManager.GetComponent<FactoryPanel>().restoreTimeDisplay(unitTime[currentUnitCreation], currentUnitCreation);
                 currentUnitCreation = null;
@@ -93,8 +96,21 @@ public class Factory : MonoBehaviour
 
     public void createUnit(string unit)
     {
-        Debug.Log("enter create unit of factory");
+        Debug.Log("ah bon ?");
+        Debug.Log(unit);
         currentUnitCreation = unit;
+        switch (currentUnitCreation)
+        {
+            case "soldier":
+                unitType = 1;
+                break;
+            case "tank":
+                unitType = 2;
+                break;
+            case "plane":
+                unitType = 3;
+                break;
+        }
         remainingTurn = unitTime[unit];
         myBubble.GetComponent<Bubble>().EnableBubble();
         myBubble.GetComponent<Bubble>().SetBubbleImage(unit);

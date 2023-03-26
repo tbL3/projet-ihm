@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -15,6 +16,10 @@ public class GridManager : MonoBehaviour
 
     public GameObject selectedUnit;
 
+    public GameObject stockUnits;
+
+    public GameObject player;
+
     Node[,] graph;
 
     [SerializeField] private int[,] arrayGrid = new int[,] { { 0, 0, 0, 0, 0},
@@ -28,9 +33,8 @@ public class GridManager : MonoBehaviour
     private void Start()
     {
         this.width = 7; this.height = 5;
-        selectedUnit.GetComponent<UnitScript>().x = (int)selectedUnit.transform.position.x;
-        selectedUnit.GetComponent<UnitScript>().y = (int)selectedUnit.transform.position.y;
-        selectedUnit.GetComponent<UnitScript>().map = this;
+        stockUnits = new GameObject();
+        stockUnits.name = "UnitStock";
         GenerateGrid(arrayGrid);
         GeneratePathfindingGraph();
         
@@ -39,6 +43,7 @@ public class GridManager : MonoBehaviour
 
     private void Update()
     {
+        
         MoveUnit();
         
     }
@@ -69,16 +74,19 @@ public class GridManager : MonoBehaviour
 
             }
         }
-        
         gameCamera.transform.position = new Vector3((float)width - 0.5f, (float)height - 0.5f, -10);
     }
 
     public void MoveUnit()
     {
-        if(selectedUnit.GetComponent<UnitScript>().currentPath != null)
+        if (selectedUnit != null)
         {
-            selectedUnit.GetComponent<UnitScript>().MoveNextTile();
+            if (selectedUnit.GetComponent<UnitScript>().currentPath != null)
+            {
+                selectedUnit.GetComponent<UnitScript>().MoveNextTile();
+            }
         }
+        
     }
     public float CostToEnterTile(int sourceX, int sourceY, int targetX, int targetY)
     {
