@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 291959190}
   - component: {fileID: 291959189}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: popUpYesText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -654,13 +654,25 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 2132442795345654201, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
+      propertyPath: m_Name
+      value: unitNameReinforcedSoldier
+      objectReference: {fileID: 0}
     - target: {fileID: 2132442795404350205, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
       propertyPath: m_Name
       value: planeTimeText
       objectReference: {fileID: 0}
+    - target: {fileID: 2132442795708625615, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
+      propertyPath: m_Name
+      value: unitNamePlane
+      objectReference: {fileID: 0}
     - target: {fileID: 2132442795727933404, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132442795793207353, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
+      propertyPath: m_Name
+      value: unitNameSoldier
       objectReference: {fileID: 0}
     - target: {fileID: 2132442795848014603, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
       propertyPath: m_Name
@@ -669,6 +681,14 @@ PrefabInstance:
     - target: {fileID: 2132442795917750333, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
       propertyPath: m_Name
       value: soldierTimeText
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132442796121951642, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
+      propertyPath: m_Name
+      value: unitNameReinforcedPlane
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132442796126900308, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
+      propertyPath: m_Name
+      value: unitNameReinforcedTank
       objectReference: {fileID: 0}
     - target: {fileID: 2132442796293935283, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
       propertyPath: m_Pivot.x
@@ -809,6 +829,10 @@ PrefabInstance:
     - target: {fileID: 2132442796422509700, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
       propertyPath: m_Name
       value: reinforcedSoldierTimeText
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132442796823699805, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
+      propertyPath: m_Name
+      value: unitNameTank
       objectReference: {fileID: 0}
     - target: {fileID: 2655236877222643989, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
       propertyPath: m_Enabled
@@ -1019,7 +1043,7 @@ GameObject:
   - component: {fileID: 626885986}
   - component: {fileID: 626885985}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: popUpNoText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1293,7 +1317,7 @@ GameObject:
   - component: {fileID: 1011260627}
   - component: {fileID: 1011260626}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: skipTurnText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

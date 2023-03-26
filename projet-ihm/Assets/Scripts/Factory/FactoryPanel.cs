@@ -119,13 +119,17 @@ public class FactoryPanel : MonoBehaviour
     public void changeTimeDisplay(string unit)
     {
         //la référence du texte indiquant le nombre de tour nécéssaire est = au nom de l'unité + TimeText 
+        EnableCanevas();
         myText = GameObject.Find(unit + "TimeText").GetComponent<TMP_Text>();
         myText.text = (int.Parse(myText.text) - 1).ToString();
+        DisableCanevas();
     }
     public void restoreTimeDisplay(int time, string unit)
     {
+        EnableCanevas();
         myText = GameObject.Find(unit + "TimeText").GetComponent<TMP_Text>();
         myText.text = time.ToString();
+        DisableCanevas();
     }
 
     public void CreateUnit(string unit)
