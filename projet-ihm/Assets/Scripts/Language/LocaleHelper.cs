@@ -13,8 +13,7 @@ public class LocaleHelper : MonoBehaviour
             case SystemLanguage.French:
                 return LocaleApplication.FR;
             default:
-                return LocaleApplication.EN;
-                break;
+                return LocaleApplication.EN;              
         }
     }
 

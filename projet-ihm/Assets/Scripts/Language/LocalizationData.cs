@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LocalizationData : MonoBehaviour
+public class LocalizationData
 {
     public List<LocalizationItems> items;
 }

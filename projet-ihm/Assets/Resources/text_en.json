@@ -1,11 +1,11 @@
 {
     "items" : [
         {
-            "key" : "unityButton",
+            "key" : "unityButtonText",
             "value" : "Unit"
         },
         {
-            "key" : "researchButton",
+            "key" : "researchButtonText",
             "value" : "research"
         },
         {
@@ -19,7 +19,8 @@
         {
             "key" : "unitNamePlane",
             "value" : "plane"
-        },{
+        },
+        {
             "key" : "unitNameTank",
             "value" : "tank"
         },
@@ -38,7 +39,8 @@
         {
             "key" : "popUpNoText",
             "value" : "no"
-        },{
+        },
+        {
             "key" : "popUpYesText",
             "value" : "yes"
         },
