@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     private Button skipTurn;
     [SerializeField] private GameObject myFactory;
     public GameObject map;
+    private Button mainMenuButton;
+    private GameObject winScreenCanevas;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,11 +26,15 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
+        winScreenCanevas = GameObject.Find("winScreenCanevas");
+        mainMenuButton = GameObject.Find("mainMenuButton").GetComponent<Button>();
+        mainMenuButton.onClick.AddListener(() => changeScene.ChangeScene(0));
         GameObject obj = GameObject.Find("skipTurnButton");
         skipTurn = obj.GetComponent<Button>();
         skipTurn.onClick.AddListener(() => myFactory.GetComponent<Factory>().OnNewTurn()) ;
         skipTurn.onClick.AddListener(() => OnNewTurnUnits());
         map.GetComponent<GridManager>().selectedUnit = null;
+        winScreenCanevas.SetActive(false);
     }
 
     public void OnNewTurnUnits()
@@ -37,5 +43,10 @@ public class GameManager : MonoBehaviour
         {
             unit.GetComponent<UnitScript>().OnNewTurn();
         }
+    }
+
+    public void OnWin()
+    {
+        winScreenCanevas.SetActive(true);
     }
 }
