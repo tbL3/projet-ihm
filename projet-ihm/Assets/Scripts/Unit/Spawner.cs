@@ -31,6 +31,17 @@ public class Spawner : MonoBehaviour
             case 3:
                 prefab = plane;
                 break;
+            case 4:
+                prefab = soldier;
+                break;
+
+            case 5:
+                prefab = tank;
+                break;
+
+            case 6:
+                prefab = plane;
+                break;
 
             // Ajoutez des cas pour d'autres prefabs si nécessaire.
 

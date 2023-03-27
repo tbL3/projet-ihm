@@ -110,6 +110,15 @@ public class Factory : MonoBehaviour
             case "plane":
                 unitType = 3;
                 break;
+            case "reinforcedSoldier":
+                unitType = 4;
+                break;
+            case "reinforcedTank":
+                unitType = 5;
+                break;
+            case "reinforcedPlane":
+                unitType = 6;
+                break;
         }
         remainingTurn = unitTime[unit];
         myBubble.GetComponent<Bubble>().EnableBubble();
