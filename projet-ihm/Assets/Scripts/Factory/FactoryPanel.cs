@@ -19,6 +19,8 @@ public class FactoryPanel : MonoBehaviour
     private Button Button4;
     private Button Button5;
     private Button Button6;
+    private Button Button7;
+    private Button Button8;
     private TMP_Text myText;
     [SerializeField] private GameObject myFactory;
 
@@ -52,6 +54,8 @@ public class FactoryPanel : MonoBehaviour
         GameObject obj7 = GameObject.Find("invisibleButton4");
         GameObject obj8 = GameObject.Find("invisibleButton5");
         GameObject obj9 = GameObject.Find("invisibleButton6");
+        Button7= GameObject.Find("invisibleResearchButton1").GetComponent<Button>();
+        Button8 = GameObject.Find("invisibleResearchButton2").GetComponent<Button>();
         crossButton = obj.GetComponent<Button>();
         unityButton = obj2.GetComponent<Button>();
         researchButton = obj3.GetComponent<Button>();
@@ -70,6 +74,9 @@ public class FactoryPanel : MonoBehaviour
         Button4.onClick.AddListener(() => CreateUnit("reinforcedSoldier"));
         Button5.onClick.AddListener(() => CreateUnit("reinforcedTank"));
         Button6.onClick.AddListener(() => CreateUnit("reinforcedPlane"));
+        Button7.onClick.AddListener(() => MakeResearch("UnlockUnit"));
+        Button7.onClick.AddListener(() => MakeResearch("ReduceTime"));
+
     }
 
     // Update is called once per frame
@@ -116,6 +123,7 @@ public class FactoryPanel : MonoBehaviour
 
     //permet de décroitre le nombre de tour nécéssaire à la création de l'unité à mesure que l'on avance dans les tours
     //(quand une création est en cours) 
+    //unit peut représenter une unité ou une recherche
     public void changeTimeDisplay(string unit)
     {
         //la référence du texte indiquant le nombre de tour nécéssaire est = au nom de l'unité + TimeText 
@@ -143,6 +151,18 @@ public class FactoryPanel : MonoBehaviour
         {
             Debug.Log("enter else ");
             myFactory.GetComponent<Factory>().createUnit(unit);
+        }
+    }
+
+    public void MakeResearch(string research)
+    {
+        if (myFactory.GetComponent<Factory>().getRemainingTurn() > 0)
+        {
+            myFactory.GetComponent<Factory>().EnablePopup(research);
+        }
+        else
+        {
+            myFactory.GetComponent<Factory>().StartResearch(research);
         }
     }
 
