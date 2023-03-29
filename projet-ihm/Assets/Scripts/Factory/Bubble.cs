@@ -8,6 +8,7 @@ public class Bubble : MonoBehaviour
     private Sprite[] soldierSprite;
     private Sprite[] tankSprite;
     private Sprite[] planeSprite;
+    private Sprite[] researchSprite;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,7 @@ public class Bubble : MonoBehaviour
         soldierSprite = Resources.LoadAll<Sprite>("soldier");
         tankSprite = Resources.LoadAll<Sprite>("tank");
         planeSprite = Resources.LoadAll<Sprite>("plane");
+        researchSprite = Resources.LoadAll<Sprite>("research");
         GameObject obj = GameObject.Find("bubbleImage");
         bubbleImage = obj.GetComponent<SpriteRenderer>();
     }
@@ -45,7 +47,6 @@ public class Bubble : MonoBehaviour
         {
             unit = unit.Split("reinforced")[1].ToLower();
         }
-        Debug.Log(unit + "aaaaa");
         switch (unit)
         {
             case "soldier" :
@@ -56,6 +57,9 @@ public class Bubble : MonoBehaviour
                 break;
             case "plane":
                 bubbleImage.sprite = planeSprite[0];
+                break;
+            case "research":
+                bubbleImage.sprite = researchSprite[0];
                 break;
             default:
                 break;
