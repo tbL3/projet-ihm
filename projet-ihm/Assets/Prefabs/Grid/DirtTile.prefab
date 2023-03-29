@@ -99,6 +99,7 @@ MonoBehaviour:
   tileRenderer: {fileID: 8918772158516065871}
   hoverTile: {fileID: 3594630474805826817}
   tileVisualPrefab: {fileID: 4987942170898698085}
+  tileOccupied: 1
   isWalkable: 1
   movementCost: 1
 --- !u!212 &8918772158516065871 stripped

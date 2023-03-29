@@ -20,9 +20,11 @@ public class Tile : MonoBehaviour
 
     public GameObject tileVisualPrefab;
 
-    private bool tileOccupied = false;
+    public bool tileOccupied;
 
-    public bool isWalkable = true;
+    public bool isWalkable;
+
+    public Node node;
 
     public float movementCost = 1;
     public void Init(bool isOffset)
@@ -50,9 +52,15 @@ public class Tile : MonoBehaviour
         {
             if(map.selectedUnit != null)
             {
+                map.selectedUnit.canAttack = false;
                 map.GeneratePathTo(tileX, tileY);
             }
             
         }
+    }
+
+    public float DistanceTo(Tile n)
+    {
+        return Vector2.Distance(new Vector2(tileX, tileY), new Vector2(n.tileX, n.tileY));
     }
 }

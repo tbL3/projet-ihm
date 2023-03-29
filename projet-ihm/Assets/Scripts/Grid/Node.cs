@@ -17,4 +17,9 @@ public class Node
     {
         return Vector2.Distance(new Vector2(x, y), new Vector2(n.x, n.y));
     }
+
+    public string toString()
+    {
+        return $"{x},{y}; voisin: {neighbours}";
+    }
 }

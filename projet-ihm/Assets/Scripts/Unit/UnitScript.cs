@@ -10,7 +10,7 @@ public class UnitScript : MonoBehaviour
     public int teamNum;
     public int x;
     public int y;
-    public GameObject map;
+    public GridManager map;
     
     //Meta defining play here
     public Queue<int> movementQueue;
@@ -19,12 +19,18 @@ public class UnitScript : MonoBehaviour
 
     public float visualMovementSpeed;
     public List<Node> currentPath = null;
+    public List<Node> attackPath = null;
+
+    public UnitScript enemy;
+    public bool shouldAttack;
+    public bool canAttack;
     //Animator
     public Animator animator;
 
     public Vector2 target;
     private float t;
-    public GameObject tileBeingOccupied;
+    public Tile tileBeingOccupied;
+    public Tile previousTile;
 
     public GameObject damagedParticle;
     //UnitStats
@@ -54,21 +60,7 @@ public class UnitScript : MonoBehaviour
     //public Material unitWaitMaterial;
 
     //public tileMapScript map;
-
-    //Location for positional update
-    public Transform startPoint;
-    public Transform endPoint;
     public float moveSpeedTime = 10f;
-
-    //3D Model or 2D Sprite variables to check which version to use
-    //Make sure only one of them are enabled in the inspector
-    //public GameObject holder3D;
-    public GameObject holder2D;
-    // Total distance between the markers.
-    private float journeyLength;
-
-    //Boolean to startTravelling
-    public bool unitInMovement;
 
 
     //Enum for unit states
@@ -109,8 +101,8 @@ public class UnitScript : MonoBehaviour
             while (currNode < currentPath.Count - 1)
             {
 
-                Vector2 start = map.GetComponent<GridManager>().TileCoordToWorldCoord(currentPath[currNode].x, currentPath[currNode].y);
-                Vector2 end = map.GetComponent<GridManager>().TileCoordToWorldCoord(currentPath[currNode + 1].x, currentPath[currNode + 1].y);
+                Vector2 start = map.TileCoordToWorldCoord(currentPath[currNode].x, currentPath[currNode].y);
+                Vector2 end = map.TileCoordToWorldCoord(currentPath[currNode + 1].x, currentPath[currNode + 1].y);
 
                 Debug.DrawLine(start, end, Color.red);
 
@@ -118,46 +110,105 @@ public class UnitScript : MonoBehaviour
                 
             }
             
-        }      
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+            if (hit.collider != null && map.selectedUnit == this)
+            {
+                
+                enemy = hit.collider.gameObject.GetComponent<UnitScript>();                          
+                if (enemy != null && enemy.teamNum != teamNum)
+                {
+                    // L'objet touché par le rayon est une unité ennemie, vous pouvez effectuer l'action que vous souhaitez ici.
+                    shouldAttack = true;
+                    
+                }
+            }
+        }
+        MoveNextTile();
+        Attack(enemy);
     }
-    /*private void Awake()
+
+    public void MoveToAttack(int x, int y)
     {
+        attackPath = new List<Node>();
+        map.GeneratePathTo(x, y);
+        
+        attackPath.AddRange(currentPath.GetRange(currentPath.Count - attackRange, attackRange));
+        currentPath.RemoveRange(currentPath.Count - attackRange, attackRange);
+        foreach (Node node in currentPath)
+        {
+            Debug.Log(node.toString());
+        }
 
-        animator = holder2D.GetComponent<Animator>();
-        movementQueue = new Queue<int>();
-        combatQueue = new Queue<int>();
-
-        x = (int)transform.position.x;
-        y = (int)transform.position.z;
-        unitMoveState = movementStates.Unselected;
-        currentHealthPoints = maxHealthPoints;
-        //hitPointsText.SetText(currentHealthPoints.ToString());
-
-    }*/
+    }
+    public void Attack(UnitScript enemy)
+    {
+        if (shouldAttack == true)
+        {            
+            MoveToAttack(enemy.x, enemy.y);
+            int distance = attackPath.Count;
+    
+            if (distance <= attackRange && currentPath.Count == 1)
+            {
+                if (this != enemy)
+                {
+                    enemy.currentHealthPoints -= attackDamage;
+                }
+                if (enemy.currentHealthPoints <= 0)
+                {
+                    Destroy(enemy.gameObject);
+                }
+            }
+            
+        }
+               
+        shouldAttack = false;
+    }
 
     private void OnMouseDown()
     {
-        // Faites quelque chose avec l'objet cliqué
-        Debug.Log("Objet cliqué : " + map.GetComponent<GridManager>().name);
-        map.GetComponent<GridManager>().selectedUnit = gameObject;
-
+        if(map.selectedUnit == null || map.selectedUnit.teamNum == teamNum)
+        {
+            // Faites quelque chose avec l'objet cliqué
+            Debug.Log("Objet cliqué : " + gameObject);
+            map.selectedUnit = this;
+        }
     }
     public void OnNewTurn()
     {
         Debug.Log("Click");
         remainingMove = moveRange;
+        if(enemy != null)
+        {
+            shouldAttack = true;
+        }
+        else
+        {
+            shouldAttack = false;
+        }
     }
     public void MoveNextTile()
     {
         while (remainingMove > 0 && currentPath != null)
         {
-            
+            if (currentPath.Count == 1)
+            {
+                // We only have one tile left in the path, and that tile MUST be our ultimate
+                // destination -- and we are standing on it!
+                // So let's just clear our pathfinding info.
+                currentPath = null;
+            }
+
             if (currentPath == null)
                 return;
 
             // Get cost from current tile to next tile
             
-            remainingMove -= map.GetComponent<GridManager>().CostToEnterTile(currentPath[0].x, currentPath[0].y, currentPath[1].x, currentPath[1].y);
+            remainingMove -= map.CostToEnterTile(currentPath[0].x, currentPath[0].y, currentPath[1].x, currentPath[1].y);
             
             
             // Move us to the next tile in the sequence
@@ -166,18 +217,14 @@ public class UnitScript : MonoBehaviour
             
             // Remove the old "current" tile
             currentPath.RemoveAt(0);
-            if (currentPath.Count == 1)
-            {
-                // We only have one tile left in the path, and that tile MUST be our ultimate
-                // destination -- and we are standing on it!
-                // So let's just clear our pathfinding info.
-                currentPath = null;
-            }
+            
         }
         target = new Vector2(x * 2, y * 2);
-        currentPath = null;
         
     }
+
+
+
     /*public void LateUpdate()
     {
         healthBarCanvas.transform.forward = Camera.main.transform.forward;
@@ -281,25 +328,6 @@ public class UnitScript : MonoBehaviour
         }
     }
 
-
-    public void unitDie()
-    {
-        if (holder2D.activeSelf)
-        {
-            StartCoroutine(fadeOut());
-            StartCoroutine(checkIfRoutinesRunning());
-
-        }
-
-        //Destroy(gameObject,2f);
-        /*
-        Renderer rend = GetComponentInChildren<SpriteRenderer>();
-        Color c = rend.material.color;
-        c.a = 0f;
-        rend.material.color = c;
-        StartCoroutine(fadeOut(rend));*/
-
-    }
     public IEnumerator checkIfRoutinesRunning()
     {
         while (combatQueue.Count > 0)
