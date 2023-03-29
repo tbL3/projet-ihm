@@ -24,6 +24,11 @@ public class Factory : MonoBehaviour
         {"reinforcedTank", 5 },
         {"reinforcedPlane", 7 }
     };
+    private Dictionary<string, int> researchTime = new Dictionary<string, int>()
+    {
+        {"reinforcedUnit", 4 },
+        {"ReduceTime", 6 },
+    };
     private int unitType;
     public GameObject spawner;
     
@@ -99,6 +104,8 @@ public class Factory : MonoBehaviour
         Debug.Log("ah bon ?");
         Debug.Log(unit);
         currentUnitCreation = unit;
+        //au cas ou on à annuler une recherche pour lancer la production
+        currentResearch = null;
         switch (currentUnitCreation)
         {
             case "soldier":
@@ -127,6 +134,24 @@ public class Factory : MonoBehaviour
         Debug.Log("currentCreation" + currentUnitCreation + "reaminingTurn" + remainingTurn);
     }
 
+    public void StartResearch(string research)
+    {
+        remainingTurn = researchTime[research];
+        currentResearch = research;
+        //au cas ou on à annuler une production pour lancer la recherche
+        currentUnitCreation = null;
+        myBubble.GetComponent<Bubble>().EnableBubble();
+        //myBubble.GetComponent<Bubble>().SetBubbleImage(unit);
+        PanelManager.GetComponent<FactoryPanel>().closeModal();
+
+    }
+
+    public void EndResearch()
+    {
+
+    }
+
+    //unit peut être une unité ou une recherche
     public void EnablePopup(string unit)
     {
         canvasPopup.SetActive(true);
@@ -137,7 +162,14 @@ public class Factory : MonoBehaviour
     {
         if (my_bool)
         {
-            createUnit(waitingResponseFor);
+            if (currentUnitCreation != null)
+            {
+                createUnit(waitingResponseFor);
+            }
+            else if(currentResearch != null)
+            {
+                StartResearch(waitingResponseFor);
+            }
             PanelManager.GetComponent<FactoryPanel>().DisableCanevas();
         }
         canvasPopup.SetActive(false);
