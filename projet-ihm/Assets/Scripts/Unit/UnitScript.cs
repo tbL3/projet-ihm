@@ -122,9 +122,11 @@ public class UnitScript : MonoBehaviour
                 enemy = hit.collider.gameObject.GetComponent<UnitScript>();                          
                 if (enemy != null && enemy.teamNum != teamNum)
                 {
-                    // L'objet touché par le rayon est une unité ennemie, vous pouvez effectuer l'action que vous souhaitez ici.
-                    shouldAttack = true;
-                    
+                    shouldAttack = true;                    
+                }
+                else
+                {
+                    enemy = null;
                 }
             }
         }
@@ -168,8 +170,7 @@ public class UnitScript : MonoBehaviour
                 }
             }
             
-        }
-               
+        }    
         shouldAttack = false;
     }
 
