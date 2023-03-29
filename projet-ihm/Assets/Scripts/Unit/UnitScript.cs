@@ -128,6 +128,10 @@ public class UnitScript : MonoBehaviour
                 }
             }
         }
+        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
+        {
+            map.selectedUnit = null;
+        }
         MoveNextTile();
         Attack(enemy);
     }
