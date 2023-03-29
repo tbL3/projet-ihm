@@ -13,6 +13,7 @@ public class Factory : MonoBehaviour
     private string waitingResponseFor;
     private Button yesButton;
     private Button noButton;
+    private bool isReinforcedUnitEnabled = false;
     [SerializeField] public GameObject PanelManager;
     [SerializeField] public GameObject myBubble;
     private Dictionary<string, int> unitTime = new Dictionary<string, int>()
@@ -26,7 +27,7 @@ public class Factory : MonoBehaviour
     };
     private Dictionary<string, int> researchTime = new Dictionary<string, int>()
     {
-        {"reinforcedUnit", 4 },
+        {"UnlockUnit", 4 },
         {"ReduceTime", 6 },
     };
     private int unitType;
@@ -35,7 +36,6 @@ public class Factory : MonoBehaviour
 
 
     // Start is called before the first frame update
-
     public int getRemainingTurn()
     {
         return remainingTurn;
@@ -70,25 +70,44 @@ public class Factory : MonoBehaviour
 
     public void OnNewTurn()
     {
+        PanelManager.GetComponent<FactoryPanel>().closeModal();
         if (remainingTurn > 1)
         {
+            if(currentResearch != null)
+            {             
+                PanelManager.GetComponent<FactoryPanel>().changeTimeDisplay(currentResearch);
+            }
+            else
+            {
+                PanelManager.GetComponent<FactoryPanel>().changeTimeDisplay(currentUnitCreation);
+            }
             remainingTurn--;
-            PanelManager.GetComponent<FactoryPanel>().changeTimeDisplay(currentUnitCreation);
+           
         }
         else if (remainingTurn == 1)
         {
             if (currentResearch != null)
             {
-                //do thing
+                
+                if(currentResearch == "ReduceTime")
+                {
+                    RduceTime();
+                }
+                else if(currentResearch == "UnlockUnit")
+                {
+                    UnlockUnit();
+                }
+               
+                PanelManager.GetComponent<FactoryPanel>().restoreTimeDisplay(researchTime[currentResearch], currentResearch);
                 currentResearch = null;
             }
             else
             {
-                spawner.GetComponent<Spawner>().SpawnUnit(0, 0, unitType);
-                myBubble.GetComponent<Bubble>().DisableBubble();
+                spawner.GetComponent<Spawner>().SpawnUnit(0, 0, unitType);        
                 PanelManager.GetComponent<FactoryPanel>().restoreTimeDisplay(unitTime[currentUnitCreation], currentUnitCreation);
                 currentUnitCreation = null;
             }
+            myBubble.GetComponent<Bubble>().DisableBubble();
             remainingTurn = 0;
         }
     }
@@ -97,12 +116,11 @@ public class Factory : MonoBehaviour
     {
         PanelManager.GetComponent<FactoryPanel>().EnableCanevas();
         PanelManager.GetComponent<FactoryPanel>().openUnity();
+        PanelManager.GetComponent<FactoryPanel>().SwitchReinforcedUnitButton(isReinforcedUnitEnabled);
     }
 
     public void createUnit(string unit)
     {
-        Debug.Log("ah bon ?");
-        Debug.Log(unit);
         currentUnitCreation = unit;
         //au cas ou on à annuler une recherche pour lancer la production
         currentResearch = null;
@@ -131,7 +149,6 @@ public class Factory : MonoBehaviour
         myBubble.GetComponent<Bubble>().EnableBubble();
         myBubble.GetComponent<Bubble>().SetBubbleImage(unit);
         PanelManager.GetComponent<FactoryPanel>().closeModal();
-        Debug.Log("currentCreation" + currentUnitCreation + "reaminingTurn" + remainingTurn);
     }
 
     public void StartResearch(string research)
@@ -141,9 +158,8 @@ public class Factory : MonoBehaviour
         //au cas ou on à annuler une production pour lancer la recherche
         currentUnitCreation = null;
         myBubble.GetComponent<Bubble>().EnableBubble();
-        //myBubble.GetComponent<Bubble>().SetBubbleImage(unit);
+        myBubble.GetComponent<Bubble>().SetBubbleImage("research");
         PanelManager.GetComponent<FactoryPanel>().closeModal();
-
     }
 
     public void EndResearch()
@@ -162,11 +178,11 @@ public class Factory : MonoBehaviour
     {
         if (my_bool)
         {
-            if (currentUnitCreation != null)
+            if (unitTime.ContainsKey(waitingResponseFor))
             {
                 createUnit(waitingResponseFor);
             }
-            else if(currentResearch != null)
+            else if(researchTime.ContainsKey(waitingResponseFor))
             {
                 StartResearch(waitingResponseFor);
             }
@@ -174,6 +190,21 @@ public class Factory : MonoBehaviour
         }
         canvasPopup.SetActive(false);
     }
+
+    private void RduceTime() {
+        List<string> keys = new List<string>(unitTime.Keys);
+        foreach (String key in keys)
+        {
+            unitTime[key] -= 1;
+            PanelManager.GetComponent<FactoryPanel>().changeTimeDisplay(key);
+        }
+    }
+
+    private void UnlockUnit()
+    {
+        this.isReinforcedUnitEnabled = true;
+    }
+
 
 
 }

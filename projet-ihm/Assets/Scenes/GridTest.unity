@@ -577,7 +577,7 @@ GameObject:
   - component: {fileID: 250923275}
   - component: {fileID: 250923274}
   m_Layer: 5
-  m_Name: researchTime2
+  m_Name: ReduceTimeTimeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -686,7 +686,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: -74.31945}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1350,7 +1350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2655236877121153940, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
       propertyPath: m_Name
-      value: timeReduceResearchText
+      value: ReduceTimeResearchText
       objectReference: {fileID: 0}
     - target: {fileID: 2655236877121153942, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
       propertyPath: m_text
@@ -1725,6 +1725,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dea6cbd229658e438a712d829867c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &782360554 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2655236877121153940, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
+  m_PrefabInstance: {fileID: 429409850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &782360558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782360554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9b34cf33f800594ebb86d34df93ff8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _localizationKey: timeReduceResearchText
 --- !u!1 &794687887
 GameObject:
   m_ObjectHideFlags: 0
@@ -2031,7 +2049,7 @@ GameObject:
   - component: {fileID: 966430860}
   - component: {fileID: 966430862}
   m_Layer: 5
-  m_Name: UnlockUnitResearchtext
+  m_Name: UnlockUnitResearchText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2166,7 +2184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9b34cf33f800594ebb86d34df93ff8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _localizationKey: UnlockUnitResearchtext
+  _localizationKey: UnlockUnitResearchText
 --- !u!1 &1011260624
 GameObject:
   m_ObjectHideFlags: 0
@@ -3816,7 +3834,7 @@ GameObject:
   - component: {fileID: 1768404933}
   - component: {fileID: 1768404932}
   m_Layer: 5
-  m_Name: TimeReduceTimeText
+  m_Name: image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3892,7 +3910,7 @@ GameObject:
   - component: {fileID: 1787623244}
   - component: {fileID: 1787623243}
   m_Layer: 5
-  m_Name: researchTime1
+  m_Name: UnlockUnitTimeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3915,8 +3933,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 652, y: 444}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 652, y: 423.87}
+  m_SizeDelta: {x: 200, y: 128.92}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1787623243
 MonoBehaviour:

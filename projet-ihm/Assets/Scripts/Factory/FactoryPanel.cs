@@ -75,8 +75,7 @@ public class FactoryPanel : MonoBehaviour
         Button5.onClick.AddListener(() => CreateUnit("reinforcedTank"));
         Button6.onClick.AddListener(() => CreateUnit("reinforcedPlane"));
         Button7.onClick.AddListener(() => MakeResearch("UnlockUnit"));
-        Button7.onClick.AddListener(() => MakeResearch("ReduceTime"));
-
+        Button8.onClick.AddListener(() => MakeResearch("ReduceTime"));
     }
 
     // Update is called once per frame
@@ -92,7 +91,6 @@ public class FactoryPanel : MonoBehaviour
     }
     public void closeModal()
     {
-        Debug.Log("closing mdoal");
         openBoth();
         DisableCanevas();
     }
@@ -142,14 +140,12 @@ public class FactoryPanel : MonoBehaviour
 
     public void CreateUnit(string unit)
     {
-        Debug.Log(myFactory.GetComponent<Factory>().getRemainingTurn() > 0);
         if (myFactory.GetComponent<Factory>().getRemainingTurn() > 0)
         {
             myFactory.GetComponent<Factory>().EnablePopup(unit);
         }
         else
-        {
-            Debug.Log("enter else ");
+        {       
             myFactory.GetComponent<Factory>().createUnit(unit);
         }
     }
@@ -157,13 +153,20 @@ public class FactoryPanel : MonoBehaviour
     public void MakeResearch(string research)
     {
         if (myFactory.GetComponent<Factory>().getRemainingTurn() > 0)
-        {
+        {        
             myFactory.GetComponent<Factory>().EnablePopup(research);
         }
         else
         {
             myFactory.GetComponent<Factory>().StartResearch(research);
         }
+    }
+
+    public void SwitchReinforcedUnitButton(bool enable)
+    {
+        this.Button4.interactable = enable;
+        this.Button5.interactable = enable;
+        this.Button6.interactable = enable;
     }
 
 }
