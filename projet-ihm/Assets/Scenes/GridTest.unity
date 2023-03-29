@@ -1990,7 +1990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerUnits: []
   myFactory: {fileID: 1184987933}
-  map: {fileID: 1375841000}
+  map: {fileID: 1375841001}
 --- !u!4 &1125505886
 Transform:
   m_ObjectHideFlags: 0
@@ -2267,8 +2267,8 @@ MonoBehaviour:
   - {fileID: 5012637568665999427, guid: b75737a24131b564181d26d408447299, type: 3}
   gameCamera: {fileID: 1421543437}
   selectedUnit: {fileID: 0}
-  stockUnits: {fileID: 0}
-  player: {fileID: 0}
+  stockUnits: {fileID: 2094501131}
+  player: {fileID: 1125505884}
 --- !u!4 &1375841002
 Transform:
   m_ObjectHideFlags: 0
@@ -2438,7 +2438,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6.0062175
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2986,13 +2986,63 @@ RectTransform:
   m_Children:
   - {fileID: 87856792}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1748748998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1748749000}
+  - component: {fileID: 1748748999}
+  m_Layer: 0
+  m_Name: Spawnert2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1748748999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748748998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aadd6d13b61da1459d958b5ecf97b14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamNum: 2
+  player: {fileID: 1125505884}
+  soldier: {fileID: 3186394798494038937, guid: f07bd25e30276054ab201e6ace11f3d0, type: 3}
+  tank: {fileID: 0}
+  plane: {fileID: 0}
+  map: {fileID: 1375841001}
+--- !u!4 &1748749000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748748998}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1002.7538, y: 570.4646, z: -17.862253}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1790154802
 GameObject:
   m_ObjectHideFlags: 0
@@ -3115,6 +3165,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1790154802}
   m_CullTransparentMesh: 1
+--- !u!1 &1914789059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1914789061}
+  - component: {fileID: 1914789060}
+  m_Layer: 0
+  m_Name: BattleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1914789060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914789059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba4a4927e4e47a0418d663a0bf598575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  map: {fileID: 1375841001}
+--- !u!4 &1914789061
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914789059}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.731231, y: 7.044391, z: -13.1836405}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1922900375 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2132442796823699805, guid: 94e57e48ad248bf4c9d7863a6cf3c094, type: 3}
@@ -3194,7 +3290,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2093519461
 GameObject:
@@ -3297,6 +3393,37 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_TargetDisplay: 0
+--- !u!1 &2094501131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2094501132}
+  m_Layer: 0
+  m_Name: UnitStock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2094501132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094501131}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.9536724, y: 1.7330375, z: -13.21096}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2116279658
 GameObject:
   m_ObjectHideFlags: 0
@@ -3326,11 +3453,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aadd6d13b61da1459d958b5ecf97b14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamNum: 1
   player: {fileID: 1125505884}
   soldier: {fileID: 3875801071116035673, guid: b01b61e6db99a1240981499b5e42607a, type: 3}
   tank: {fileID: 1094294060660710689, guid: 49ec68e8fcc09f241836fd3bd8c50a05, type: 3}
   plane: {fileID: 491369715521144392, guid: ba10e00bed1d85f43ab27d5ef09a0127, type: 3}
-  map: {fileID: 1375841000}
+  map: {fileID: 1375841001}
 --- !u!4 &2116279660
 Transform:
   m_ObjectHideFlags: 0

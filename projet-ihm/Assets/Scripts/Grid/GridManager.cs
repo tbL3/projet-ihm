@@ -14,7 +14,7 @@ public class GridManager : MonoBehaviour
 
     private Dictionary<Vector2, Tile> tilemap;
 
-    public GameObject selectedUnit;
+    public UnitScript selectedUnit;
 
     public GameObject stockUnits;
 
@@ -33,7 +33,6 @@ public class GridManager : MonoBehaviour
     private void Start()
     {
         this.width = 7; this.height = 5;
-        stockUnits = new GameObject();
         stockUnits.name = "UnitStock";
         GenerateGrid(arrayGrid);
         GeneratePathfindingGraph();
@@ -43,10 +42,9 @@ public class GridManager : MonoBehaviour
 
     private void Update()
     {
-        
-        MoveUnit();
-        
+
     }
+
 
     public void GenerateGrid(int[,] arrayGrid)
     {
@@ -77,16 +75,9 @@ public class GridManager : MonoBehaviour
         gameCamera.transform.position = new Vector3((float)width - 0.5f, (float)height - 0.5f, -10);
     }
 
-    public void MoveUnit()
+    public Tile GetTileAt(int x, int y)
     {
-        if (selectedUnit != null)
-        {
-            if (selectedUnit.GetComponent<UnitScript>().currentPath != null)
-            {
-                selectedUnit.GetComponent<UnitScript>().MoveNextTile();
-            }
-        }
-        
+        return tiles[arrayGrid[x, y]];
     }
     public float CostToEnterTile(int sourceX, int sourceY, int targetX, int targetY)
     {
@@ -137,6 +128,7 @@ public class GridManager : MonoBehaviour
                 graph[x, y] = new Node();
                 graph[x, y].x = x;
                 graph[x, y].y = y;
+                tiles[arrayGrid[x, y]].node = graph[x, y];
             }
         }
 
@@ -191,7 +183,7 @@ public class GridManager : MonoBehaviour
     public void GeneratePathTo(int x, int y)
     {
         // Clear out our unit's old path.
-        selectedUnit.GetComponent<UnitScript>().currentPath = null;
+        selectedUnit.currentPath = null;
 
         if (UnitCanEnterTile(x, y) == false)
         {
@@ -206,8 +198,8 @@ public class GridManager : MonoBehaviour
         List<Node> unvisited = new List<Node>();
 
         Node source = graph[
-                            selectedUnit.GetComponent<UnitScript>().x,
-                            selectedUnit.GetComponent<UnitScript>().y
+                            selectedUnit.x,
+                            selectedUnit.y
                             ];
 
         Node target = graph[
@@ -290,9 +282,11 @@ public class GridManager : MonoBehaviour
         // So we need to invert it!
 
         currentPath.Reverse();
-
-        selectedUnit.GetComponent<UnitScript>().currentPath = currentPath;
+        
+        selectedUnit.currentPath = currentPath;
+        selectedUnit.completedMovement = false;
     }
+    
     /**public Tile getTileAtPos(Vector3 pos)
     {
         if(tiles.TryGetValue(pos, out Tile tile))
