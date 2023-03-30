@@ -169,4 +169,29 @@ public class FactoryPanel : MonoBehaviour
         this.Button6.interactable = enable;
     }
 
+    public void changeButtonOpacity()
+    {
+        EnableCanevas();
+        Debug.Log("enter opacity");
+        Image image = GameObject.Find("invisibleButton6").GetComponent<Image>();
+        Image image2 = GameObject.Find("invisibleButton5").GetComponent<Image>();
+        Image image3 = GameObject.Find("invisibleButton4").GetComponent<Image>();
+        var tempColor = image.color;
+        tempColor.a = 0f;
+        image.color = tempColor;
+        tempColor = image2.color;
+        tempColor.a = 0f;
+        image2.color = tempColor;
+        tempColor = image3.color;
+        tempColor.a = 0f;
+        image3.color = tempColor;
+        DisableCanevas();
+    }
+
+    public void DisableLock()
+    {
+        EnableCanevas();
+        GameObject.Find("LockCanevas").SetActive(false);
+        DisableCanevas();
+    }
 }

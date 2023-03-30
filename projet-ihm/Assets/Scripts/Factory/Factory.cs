@@ -203,6 +203,8 @@ public class Factory : MonoBehaviour
     private void UnlockUnit()
     {
         this.isReinforcedUnitEnabled = true;
+        PanelManager.GetComponent<FactoryPanel>().changeButtonOpacity();
+        PanelManager.GetComponent<FactoryPanel>().DisableLock();
     }
 
 
