@@ -162,7 +162,7 @@ public class UnitScript : MonoBehaviour
     }
     public void Attack(UnitScript enemy)
     {
-        if (shouldAttack == true)
+        if (shouldAttack == true && enemy != null)
         {            
             MoveToAttack(enemy.x, enemy.y);
             int distance = attackPath.Count;

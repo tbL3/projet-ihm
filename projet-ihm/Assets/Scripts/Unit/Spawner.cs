@@ -49,6 +49,7 @@ public class Spawner : MonoBehaviour
                 Debug.LogError("Invalid prefab index: " + prefabIndex);
                 return;
         }
+        Debug.Log(prefab.name);
         var unit = Instantiate(prefab, new Vector2(x * 2, y * 2), Quaternion.identity, map.stockUnits.transform);
         unit.GetComponent<UnitScript>().target = unit.transform.position;
         unit.GetComponent<UnitScript>().map = map;
