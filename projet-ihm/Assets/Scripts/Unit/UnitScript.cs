@@ -162,7 +162,7 @@ public class UnitScript : MonoBehaviour
     }
     public void Attack(UnitScript enemy)
     {
-        if (shouldAttack == true && enemy != null)
+        if (shouldAttack == true && enemy != null && canAttack == true)
         {            
             MoveToAttack(enemy.x, enemy.y);
             int distance = attackPath.Count;
@@ -179,7 +179,8 @@ public class UnitScript : MonoBehaviour
                 }
             }
             
-        }    
+        }
+        canAttack = false;
         shouldAttack = false;
     }
 
@@ -200,10 +201,12 @@ public class UnitScript : MonoBehaviour
         remainingMove = moveRange;
         if(enemy != null)
         {
+            canAttack = true;
             shouldAttack = true;
         }
         else
         {
+            canAttack = true;
             shouldAttack = false;
         }
     }
