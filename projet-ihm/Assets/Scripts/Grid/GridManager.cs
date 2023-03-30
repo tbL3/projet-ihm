@@ -75,6 +75,11 @@ public class GridManager : MonoBehaviour
         gameCamera.transform.position = new Vector3((float)width - 0.5f, (float)height - 0.5f, -10);
     }
 
+    public void showUnitRange()
+    {
+        
+    }
+
     public Tile GetTileAt(int x, int y)
     {
         return tiles[arrayGrid[x, y]];
