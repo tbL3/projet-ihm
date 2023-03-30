@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 2049389925
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 190016473, guid: f794f5faee4ff124d9e8a98fee192492, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -133,6 +133,7 @@ MonoBehaviour:
   tileRenderer: {fileID: 3194468616439196085}
   hoverTile: {fileID: 7382069466896255739}
   tileVisualPrefab: {fileID: 1344441812052873375}
+  tileOccupied: 0
   isWalkable: 1
   movementCost: 1
 --- !u!1 &7382069466896255739
