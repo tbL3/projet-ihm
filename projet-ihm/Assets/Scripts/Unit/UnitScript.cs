@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Rendering;
+using Unity.VisualScripting;
 
 public class UnitScript : MonoBehaviour
 {
@@ -54,6 +55,8 @@ public class UnitScript : MonoBehaviour
     public TMP_Text damagePopupText;
     public Image damageBackdrop;
 
+    public GameObject RangeCollider;
+
 
     //This may change in the future if 2d sprites are used instead
     //public Material unitMaterial;
@@ -85,8 +88,14 @@ public class UnitScript : MonoBehaviour
     private void Start()
     {
 
-        
 
+    }
+
+    private void Awake()
+    {
+        RangeCollider = GameObject.Find("MoveRange");
+
+        RangeCollider.GetComponent<BoxCollider2D>().size = new Vector2(2 + 4 * moveRange, 2 + 4 * moveRange);
     }
 
     private void Update()
@@ -181,6 +190,8 @@ public class UnitScript : MonoBehaviour
             // Faites quelque chose avec l'objet cliqué
             Debug.Log("Objet cliqué : " + gameObject);
             map.selectedUnit = this;
+            map.showUnitRange();
+            
         }
     }
     public void OnNewTurn()
