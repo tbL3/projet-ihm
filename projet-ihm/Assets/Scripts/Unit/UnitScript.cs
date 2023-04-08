@@ -56,7 +56,7 @@ public class UnitScript : MonoBehaviour
     public Image damageBackdrop;
 
     public GameObject RangeCollider;
-
+    [SerializeField] private GameObject hover;
 
     //This may change in the future if 2d sprites are used instead
     //public Material unitMaterial;
@@ -98,10 +98,52 @@ public class UnitScript : MonoBehaviour
         RangeCollider.GetComponent<BoxCollider2D>().size = new Vector2(2 + 4 * moveRange, 2 + 4 * moveRange);
     }
 
+    private void OnMouseDown()
+    {
+        if (map.selectedUnit == null || map.selectedUnit.teamNum == teamNum)
+        {
+            // Faites quelque chose avec l'objet cliqué
+            Debug.Log("Objet cliqué : " + gameObject);
+            map.selectedUnit = this;
+            map.showUnitRange();
+
+        }
+    }
+
+    public void OnMouseEnter()
+    {
+        hover.SetActive(true);
+    }
+
+    public void OnMouseExit()
+    {
+        hover.SetActive(false);
+    }
+
     private void Update()
     {
+        //Regarde si l'unité à encore des points de vie, sinon la détruit
+        if (currentHealthPoints <= 0)
+        {
+            Destroy(gameObject);
+        }
+        //Ce qui fait bouger les unités
         t += Time.deltaTime / moveSpeedTime;
         transform.position = Vector2.MoveTowards(transform.position, target, moveSpeedTime);
+        //Vérifie si l'unité est sélectionnée, ayant pour effet d'activer le hovering, le désactive sinon et le remet à son état initiale
+        if(this == map.selectedUnit)
+        {
+            hover.SetActive(true);
+            var hoverColor = hover.GetComponent<SpriteRenderer>().color;
+            hover.GetComponent<SpriteRenderer>().color = new Color(hoverColor.r, hoverColor.g, hoverColor.b, 0.75f);
+
+        }
+        else
+        {
+            hover.SetActive(false);
+            var hoverColor = hover.GetComponent<SpriteRenderer>().color;
+            hover.GetComponent<SpriteRenderer>().color = new Color(hoverColor.r, hoverColor.g, hoverColor.b, 0.4f);
+        }
         if (currentPath != null)
         {
 
@@ -139,12 +181,13 @@ public class UnitScript : MonoBehaviour
                 }
             }
         }
-        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetMouseButtonDown(1))
         {
             map.selectedUnit = null;
         }
         MoveNextTile();
-        Attack(enemy);
+        if(enemy != null) { Attack(enemy); }
+        
     }
 
     public void MoveToAttack(int x, int y)
@@ -173,10 +216,7 @@ public class UnitScript : MonoBehaviour
                 {
                     enemy.currentHealthPoints -= attackDamage;
                 }
-                if (enemy.currentHealthPoints <= 0)
-                {
-                    Destroy(enemy.gameObject);
-                }
+                
             }
             
         }
@@ -184,17 +224,8 @@ public class UnitScript : MonoBehaviour
         shouldAttack = false;
     }
 
-    private void OnMouseDown()
-    {
-        if(map.selectedUnit == null || map.selectedUnit.teamNum == teamNum)
-        {
-            // Faites quelque chose avec l'objet cliqué
-            Debug.Log("Objet cliqué : " + gameObject);
-            map.selectedUnit = this;
-            map.showUnitRange();
-            
-        }
-    }
+
+
     public void OnNewTurn()
     {
         Debug.Log("Click");
