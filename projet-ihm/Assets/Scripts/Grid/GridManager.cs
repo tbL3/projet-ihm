@@ -20,19 +20,21 @@ public class GridManager : MonoBehaviour
 
     public GameObject player;
 
+    public Tilemap tileMapPaint;
+
     Node[,] graph;
 
-    [SerializeField] private int[,] arrayGrid = new int[,] { { 0, 0, 0, 0, 0},
-                                                             { 0, 0, 0, 0, 0},
-                                                             { 0, 0, 0, 0, 0},
-                                                             { 0, 0, 0, 0, 0},
-                                                             { 0, 0, 0, 0, 0},
-    { 0, 0, 0, 0, 0},
-    { 0, 0, 0, 0, 0},};
+    [SerializeField] private int[,] arrayGrid = new int[,] { { 1, 1, 1, 1, 1},
+                                                             { 1, 1, 1, 1, 1},
+                                                             { 1, 1, 1, 1, 1},
+                                                             { 1, 1, 1, 1, 1},
+                                                             { 1, 1, 1, 1, 1},
+    { 1, 1, 1, 1, 1},
+    { 1, 1, 1, 1, 1},};
 
     private void Start()
     {
-        this.width = 7; this.height = 5;
+        this.width = arrayGrid.GetLength(0); this.height = arrayGrid.GetLength(1);
         stockUnits.name = "UnitStock";
         GenerateGrid(arrayGrid);
         GeneratePathfindingGraph();
@@ -69,7 +71,7 @@ public class GridManager : MonoBehaviour
                 spawnedTile.tileX = x;
                 spawnedTile.tileY = y;
                 spawnedTile.map = this;
-
+                //tileMapPaint.SetTile(new Vector3Int(x, y), spawnedTile.tileBase);
             }
         }
         gameCamera.transform.position = new Vector3((float)width - 0.5f, (float)height - 0.5f, -10);

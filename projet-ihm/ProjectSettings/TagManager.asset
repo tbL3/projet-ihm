@@ -44,6 +44,9 @@ TagManager:
   - name: Board
     uniqueID: 2049389925
     locked: 0
+  - name: Hovering
+    uniqueID: 1523949101
+    locked: 0
   - name: Unit
     uniqueID: 650740851
     locked: 0
