@@ -12,6 +12,9 @@ public class Spawner : MonoBehaviour
     public GameObject soldier;
     public GameObject tank;
     public GameObject plane;
+    public GameObject reinforcedSoldier;
+    public GameObject reinforcedTank;
+    public GameObject reinforcedPlane;
 
     public GridManager map;
 
@@ -32,15 +35,15 @@ public class Spawner : MonoBehaviour
                 prefab = plane;
                 break;
             case 4:
-                prefab = soldier;
+                prefab = reinforcedSoldier;
                 break;
 
             case 5:
-                prefab = tank;
+                prefab = reinforcedTank;
                 break;
 
             case 6:
-                prefab = plane;
+                prefab = reinforcedPlane;
                 break;
 
             // Ajoutez des cas pour d'autres prefabs si nécessaire.

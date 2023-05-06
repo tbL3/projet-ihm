@@ -56,7 +56,6 @@ public class UnitScript : MonoBehaviour
     public Image damageBackdrop;
 
     public GameObject RangeCollider;
-    [SerializeField] private GameObject hover;
 
     //This may change in the future if 2d sprites are used instead
     //public Material unitMaterial;
@@ -112,12 +111,12 @@ public class UnitScript : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        hover.SetActive(true);
+        animator.SetBool("Selected", true);
     }
 
     public void OnMouseExit()
     {
-        hover.SetActive(false);
+        animator.SetBool("Selected", false);
     }
 
     private void Update()
@@ -133,16 +132,12 @@ public class UnitScript : MonoBehaviour
         //Vérifie si l'unité est sélectionnée, ayant pour effet d'activer le hovering, le désactive sinon et le remet à son état initiale
         if(this == map.selectedUnit)
         {
-            hover.SetActive(true);
-            var hoverColor = hover.GetComponent<SpriteRenderer>().color;
-            hover.GetComponent<SpriteRenderer>().color = new Color(hoverColor.r, hoverColor.g, hoverColor.b, 0.75f);
+            animator.SetBool("Selected", true);
 
         }
         else
         {
-            hover.SetActive(false);
-            var hoverColor = hover.GetComponent<SpriteRenderer>().color;
-            hover.GetComponent<SpriteRenderer>().color = new Color(hoverColor.r, hoverColor.g, hoverColor.b, 0.4f);
+            animator.SetBool("Selected", false);
         }
         if (currentPath != null)
         {
@@ -450,32 +445,4 @@ public class UnitScript : MonoBehaviour
         damagePopupCanvas.enabled = false;
     }
 
-    public void setSelectedAnimation()
-    {
-
-        animator.SetTrigger("toSelected");
-    }
-    public void setIdleAnimation()
-    {
-        animator.SetTrigger("toIdle");
-    }
-    public void setWalkingAnimation()
-    {
-        animator.SetTrigger("toWalking");
-    }
-
-    public void setAttackAnimation()
-    {
-        animator.SetTrigger("toAttacking");
-    }
-    public void setWaitIdleAnimation()
-    {
-
-        animator.SetTrigger("toIdleWait");
-    }
-
-    public void setDieAnimation()
-    {
-        animator.SetTrigger("dieTrigger");
-    }
 }
