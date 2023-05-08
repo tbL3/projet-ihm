@@ -285,8 +285,8 @@ MonoBehaviour:
   damagePopupCanvas: {fileID: 0}
   damagePopupText: {fileID: 0}
   damageBackdrop: {fileID: 0}
-  RangeCollider: {fileID: 0}
-  moveSpeedTime: 0.08
+  RangeCollider: {fileID: 663323199803921016}
+  moveSpeedTime: 0.04
   unitMoveState: 0
   completedMovement: 0
 --- !u!210 &3507307086402596549

@@ -146,16 +146,17 @@ public class GridManager : MonoBehaviour
             {
 
                 // This is the 4-way connection version:
-                /*				if(x > 0)
-                                    graph[x,y].neighbours.Add( graph[x-1, y] );
-                                if(x < width-1)
-                                    graph[x,y].neighbours.Add( graph[x+1, y] );
-                                if(y > 0)
-                                    graph[x,y].neighbours.Add( graph[x, y-1] );
-                                if(y < height-1)
-                                    graph[x,y].neighbours.Add( graph[x, y+1] );
-                */
+                if(x > 0)
+                    graph[x,y].neighbours.Add( graph[x-1, y] );
+                if(x < width-1)
+                    graph[x,y].neighbours.Add( graph[x+1, y] );
+                if(y > 0)
+                    graph[x,y].neighbours.Add( graph[x, y-1] );
+                if(y < height-1)
+                    graph[x,y].neighbours.Add( graph[x, y+1] );
+                
 
+                /*
                 // This is the 8-way connection version (allows diagonal movement)
                 // Try left
                 if (x > 0)
@@ -184,6 +185,7 @@ public class GridManager : MonoBehaviour
                     graph[x, y].neighbours.Add(graph[x, y + 1]);
 
                 // This also works with 6-way hexes and n-way variable areas (like EU4)
+                */
             }
         }
     }

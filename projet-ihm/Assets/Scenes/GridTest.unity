@@ -5098,10 +5098,10 @@ MonoBehaviour:
   player: {fileID: 1125505884}
   soldier: {fileID: 3875801071116035673, guid: b01b61e6db99a1240981499b5e42607a, type: 3}
   tank: {fileID: 1094294060660710689, guid: 49ec68e8fcc09f241836fd3bd8c50a05, type: 3}
-  plane: {fileID: 491369715521144392, guid: ba10e00bed1d85f43ab27d5ef09a0127, type: 3}
+  plane: {fileID: 8835534251298696478, guid: 46237a211e45cbe4c877e3720376ccd4, type: 3}
   reinforcedSoldier: {fileID: 4278070518370010846, guid: eaddfc837fb44af4bb537cdaf7430d65, type: 3}
   reinforcedTank: {fileID: 7908679029982951610, guid: 6c8457e624f86074083d48cde09d654d, type: 3}
-  reinforcedPlane: {fileID: 0}
+  reinforcedPlane: {fileID: 491369715521144392, guid: ba10e00bed1d85f43ab27d5ef09a0127, type: 3}
   map: {fileID: 1375841001}
 --- !u!4 &2116279660
 Transform:

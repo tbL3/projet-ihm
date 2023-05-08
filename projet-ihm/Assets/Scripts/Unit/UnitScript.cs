@@ -28,7 +28,7 @@ public class UnitScript : MonoBehaviour
     //Animator
     public Animator animator;
 
-    public Vector2 target;
+    public Vector3 target;
     private float t;
     public Tile tileBeingOccupied;
     public Tile previousTile;
@@ -92,8 +92,7 @@ public class UnitScript : MonoBehaviour
 
     private void Awake()
     {
-        RangeCollider = GameObject.Find("MoveRange");
-
+        Debug.Log(RangeCollider);
         RangeCollider.GetComponent<BoxCollider2D>().size = new Vector2(2 + 4 * moveRange, 2 + 4 * moveRange);
     }
 
@@ -126,11 +125,28 @@ public class UnitScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         //Ce qui fait bouger les unités
         t += Time.deltaTime / moveSpeedTime;
         transform.position = Vector2.MoveTowards(transform.position, target, moveSpeedTime);
+        MoveUnit();
+        if (target == transform.position)
+        {
+            if (remainingMove == 0)
+            {
+                animator.SetBool("Unavailable", true);
+            }
+            else
+            {
+                animator.SetBool("Idle", true);
+            }
+
+        }
+
+
+
         //Vérifie si l'unité est sélectionnée, ayant pour effet d'activer le hovering, le désactive sinon et le remet à son état initiale
-        if(this == map.selectedUnit)
+        if (this == map.selectedUnit)
         {
             animator.SetBool("Selected", true);
 
@@ -185,6 +201,36 @@ public class UnitScript : MonoBehaviour
         
     }
 
+    public void MoveUnit()
+    {
+        
+        if (target != transform.position)
+        {
+            animator.SetBool("Idle", false);
+            animator.SetBool("Move", true);
+            // Récupérer le composant SpriteRenderer du premier enfant de parentObject
+            SpriteRenderer spriteRenderer = animator.GetComponent<SpriteRenderer>();
+
+            animator.SetFloat("MoveY", target.y - transform.position.y);
+            animator.SetFloat("MoveX", target.x - transform.position.x);
+            if (target.x < transform.position.x)
+            {
+                // Modifier la valeur flipX du composant SpriteRenderer
+                spriteRenderer.flipX = false;
+            }
+
+            else if (target.x > transform.position.x)
+            {
+                // Modifier la valeur flipX du composant SpriteRenderer
+                spriteRenderer.flipX = true;
+            }     
+        }
+        else
+        {     
+            animator.SetBool("Move", false);
+        }
+
+    }
     public void MoveToAttack(int x, int y)
     {
         attackPath = new List<Node>();
@@ -224,7 +270,20 @@ public class UnitScript : MonoBehaviour
     public void OnNewTurn()
     {
         Debug.Log("Click");
+        if (animator.GetBool("Unavailable") == true)
+        {
+            animator.SetBool("Unavailable", false);
+        }
+        if(remainingMove > 0)
+        {
+            animator.SetBool("Move", true);
+        }
+        else
+        {
+            animator.SetBool("Idle", true);
+        }
         remainingMove = moveRange;
+        map.selectedUnit = null;
         if(enemy != null)
         {
             canAttack = true;
