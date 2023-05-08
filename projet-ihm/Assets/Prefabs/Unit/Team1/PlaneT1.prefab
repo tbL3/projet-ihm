@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c704faff3e270e40a49bf197ae05312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitParent: {fileID: 0}
+  unitParent: {fileID: 8835534251298696478}
 --- !u!1 &3937424222751447039
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +287,7 @@ MonoBehaviour:
   shouldAttack: 0
   canAttack: 0
   animator: {fileID: 8733823600281216994}
-  target: {x: 0, y: 0}
+  target: {x: 0, y: 0, z: 0}
   tileBeingOccupied: {fileID: 0}
   previousTile: {fileID: 0}
   damagedParticle: {fileID: 0}
@@ -305,7 +305,7 @@ MonoBehaviour:
   damagePopupCanvas: {fileID: 0}
   damagePopupText: {fileID: 0}
   damageBackdrop: {fileID: 0}
-  RangeCollider: {fileID: 0}
+  RangeCollider: {fileID: 2731344452602730738}
   moveSpeedTime: 0.1
   unitMoveState: 0
   completedMovement: 0

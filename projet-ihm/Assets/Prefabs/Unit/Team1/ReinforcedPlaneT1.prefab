@@ -58,7 +58,7 @@ MonoBehaviour:
   shouldAttack: 0
   canAttack: 0
   animator: {fileID: 4971689879501144215}
-  target: {x: 0, y: 0}
+  target: {x: 0, y: 0, z: 0}
   tileBeingOccupied: {fileID: 0}
   previousTile: {fileID: 0}
   damagedParticle: {fileID: 0}
@@ -76,7 +76,7 @@ MonoBehaviour:
   damagePopupCanvas: {fileID: 0}
   damagePopupText: {fileID: 0}
   damageBackdrop: {fileID: 0}
-  RangeCollider: {fileID: 0}
+  RangeCollider: {fileID: 1089892969754747949}
   moveSpeedTime: 0.1
   unitMoveState: 0
   completedMovement: 0
